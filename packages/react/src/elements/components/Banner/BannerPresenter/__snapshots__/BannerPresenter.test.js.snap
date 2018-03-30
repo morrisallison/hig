@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Banner/BannerPresenter renders with a fragment as children 1`] = `
+exports[`banner/BannerPresenter/BannerPresenter renders with a fragment as children 1`] = `
 <div
   aria-labelledby={undefined}
   className="hig__banner hig__banner--primary hig__banner--interactive"
@@ -72,10 +72,10 @@ exports[`Banner/BannerPresenter renders with a fragment as children 1`] = `
 </div>
 `;
 
-exports[`Banner/BannerPresenter renders with a label 1`] = `
+exports[`banner/BannerPresenter/BannerPresenter renders with a label 1`] = `
 <div
   aria-labelledby={undefined}
-  className="hig__banner hig__banner--error"
+  className="hig__banner hig__banner--urgent"
   role="alert"
 >
   <figure
@@ -100,7 +100,7 @@ exports[`Banner/BannerPresenter renders with a label 1`] = `
         className="hig__typography hig__typography__text hig__typography--hig-cool-gray-70"
         style={Object {}}
       >
-        HELLO: 
+        HELLO:
       </span>
       <span
         className="hig__typography hig__typography__text hig__typography--hig-cool-gray-70"
@@ -140,7 +140,7 @@ exports[`Banner/BannerPresenter renders with a label 1`] = `
 </div>
 `;
 
-exports[`Banner/BannerPresenter renders with a node as children 1`] = `
+exports[`banner/BannerPresenter/BannerPresenter renders with a node as children 1`] = `
 <div
   aria-labelledby={undefined}
   className="hig__banner hig__banner--primary hig__banner--interactive"
@@ -209,7 +209,7 @@ exports[`Banner/BannerPresenter renders with a node as children 1`] = `
 </div>
 `;
 
-exports[`Banner/BannerPresenter renders with a string as children 1`] = `
+exports[`banner/BannerPresenter/BannerPresenter renders with a string as children 1`] = `
 <div
   aria-labelledby={undefined}
   className="hig__banner hig__banner--primary hig__banner--top hig__banner--interactive"
@@ -276,7 +276,7 @@ exports[`Banner/BannerPresenter renders with a string as children 1`] = `
 </div>
 `;
 
-exports[`Banner/BannerPresenter renders without props 1`] = `
+exports[`banner/BannerPresenter/BannerPresenter renders without props 1`] = `
 <div
   aria-labelledby={undefined}
   className="hig__banner hig__banner--primary"
