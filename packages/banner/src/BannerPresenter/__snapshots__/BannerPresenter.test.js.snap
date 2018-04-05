@@ -22,7 +22,7 @@ exports[`banner/BannerPresenter/BannerPresenter renders with a fragment as child
     className="hig__banner__content"
   >
     <p
-      className="hig__banner__notification"
+      className="hig__banner__message"
     >
       <span
         className="hig__typography hig__typography__text hig__typography--hig-cool-gray-70"
@@ -90,13 +90,13 @@ exports[`banner/BannerPresenter/BannerPresenter renders with a label 1`] = `
     className="hig__banner__content"
   >
     <p
-      className="hig__banner__notification"
+      className="hig__banner__message"
     >
       <span
         className="hig__typography hig__typography__text hig__typography--hig-cool-gray-70"
         style={Object {}}
       >
-        HELLO: 
+        HELLO:
       </span>
       <span
         className="hig__typography hig__typography__text hig__typography--hig-cool-gray-70"
@@ -154,7 +154,7 @@ exports[`banner/BannerPresenter/BannerPresenter renders with a node as children 
     className="hig__banner__content"
   >
     <p
-      className="hig__banner__notification"
+      className="hig__banner__message"
     >
       <span
         className="hig__typography hig__typography__text hig__typography--hig-cool-gray-70"
@@ -219,7 +219,7 @@ exports[`banner/BannerPresenter/BannerPresenter renders with a string as childre
     className="hig__banner__content"
   >
     <p
-      className="hig__banner__notification"
+      className="hig__banner__message"
     >
       <span
         className="hig__typography hig__typography__text hig__typography--hig-cool-gray-70"
@@ -282,7 +282,7 @@ exports[`banner/BannerPresenter/BannerPresenter renders without props 1`] = `
     className="hig__banner__content"
   >
     <p
-      className="hig__banner__notification"
+      className="hig__banner__message"
     >
       <span
         className="hig__typography hig__typography__text hig__typography--hig-cool-gray-70"

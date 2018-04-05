@@ -22,7 +22,7 @@ const classNames = Object.freeze({
   dismissButton: "hig__banner__dismiss-button",
   iconBackground: "hig__banner__icon-background",
   interactionsWrapper: "hig__banner__interactions-wrapper",
-  notification: "hig__banner__notification",
+  notification: "hig__banner__message",
   wrapper: "hig__banner",
   wrapperBottom: "hig__banner--bottom",
   wrapperUrgent: "hig__banner--urgent",

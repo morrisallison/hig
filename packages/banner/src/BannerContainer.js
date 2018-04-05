@@ -144,6 +144,7 @@ export default class BannerContainer extends Component {
   };
 
   updateActionWrapping = () => {
+    console.log('updateActionWrapping');
     const update = { isWrappingActions: this.shouldWrapActions() };
 
     this.setState(update, () => {
