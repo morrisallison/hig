@@ -18,10 +18,10 @@ import {
  * @typedef {Object} BannerPresenterProps
  * @property {string} [type]
  * @property {string} [label]
- * @property {string} [message]
+ * @property {string} [labelledBy]
+ * @property {any} [actions]
  * @property {string} [dismissButtonTitle]
  * @property {Function} [onDismiss]
- * @property {string} [labelId]
  * @property {boolean} [isWrappingContent]
  * @property {function(HTMLDivElement): any} [refContent]
  * @property {function(HTMLParagraphElement): any} [refNotification]
@@ -38,20 +38,20 @@ export default function BannerPresenter(props) {
   const {
     type,
     label,
-    message,
+    labelledBy,
+    actions,
     dismissButtonTitle,
     onDismiss,
-    labelId,
     isWrappingContent,
     refContent,
     refNotification,
     refInteractionsWrapper,
-    children
+    children: message,
   } = props;
 
   const hasLabel = !!label;
-  const hasActions = React.Children.count(children) > 0;
-  const wrapperLabelledBy = hasLabel ? labelId : undefined;
+  const hasActions = React.Children.count(actions) > 0;
+  const wrapperLabelledBy = hasLabel ? labelledBy : undefined;
 
   return (
     <Wrapper
@@ -63,12 +63,11 @@ export default function BannerPresenter(props) {
       <Icon type={type} />
       <Content innerRef={refContent}>
         <Notification innerRef={refNotification}>
-          {hasLabel ? <Label id={labelId}>{label}</Label> : null}
           <Message>{message}</Message>
         </Notification>
         {hasActions ? (
           <InteractionsWrapper innerRef={refInteractionsWrapper}>
-            {children}
+            {actions}
           </InteractionsWrapper>
         ) : null}
       </Content>
@@ -90,14 +89,14 @@ BannerPresenter.propTypes = {
   type: PropTypes.oneOf(AVAILABLE_TYPES),
   /** The label of the message displayed */
   label: PropTypes.string,
-  /** The displayed message */
-  message: PropTypes.string,
+  /** The ID used for ARIA labeling */
+  labelledBy: PropTypes.string,
+  /** Banner actions */
+  actions: PropTypes.node,
   /** Accessibility text for the dismiss button */
   dismissButtonTitle: PropTypes.string,
   /** Called when the banner is dismissed */
   onDismiss: PropTypes.func,
-  /** The ID used for ARIA labeling */
-  labelId: PropTypes.string,
   /** Determines whether the banner content wraps */
   isWrappingContent: PropTypes.bool,
   /** References content element */
@@ -106,6 +105,6 @@ BannerPresenter.propTypes = {
   refNotification: PropTypes.func,
   /** References interactions wrapper element */
   refInteractionsWrapper: PropTypes.func,
-  /** Banner actions */
+  /** The displayed message */
   children: PropTypes.node
 };

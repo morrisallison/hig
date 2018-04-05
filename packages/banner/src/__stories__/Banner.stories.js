@@ -12,9 +12,9 @@ function getBannerKnobs(props) {
     type,
     placement,
     label,
-    message,
     dismissButtonTitle,
     onDismiss,
+    children,
     ...otherProps
   } = props;
 
@@ -22,11 +22,11 @@ function getBannerKnobs(props) {
     type: select("Type", Banner.AVAILABLE_TYPES, type),
     placement: select("Placement", Banner.AVAILABLE_PLACEMENTS, placement),
     label: text("Label", label),
-    message: text("Message", message),
+    labelledBy: "unique-id",
     dismissButtonTitle: text("Dismiss title", dismissButtonTitle),
     onDismiss: action("Banner dismissed", onDismiss),
-    labelId: "unique-id",
     isVisible: true,
+    children: text("Message", children),
     ...otherProps
   };
 }
@@ -56,10 +56,10 @@ const stories = [
       type: Banner.types.WARNING,
       label: "PROCESS COMPLETE",
       // eslint-disable-next-line max-len
-      message:
+      children:
         "Changes have been made to you document. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.",
       /** @todo Cleanup/refactor */
-      children: ({ isWrappingActions }) => (
+      actions: ({ isWrappingActions }) => (
         <Banner.Interactions isWrappingActions={isWrappingActions}>
           <Banner.Action>
             <Button

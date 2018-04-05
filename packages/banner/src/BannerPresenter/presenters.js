@@ -73,6 +73,7 @@ export function Wrapper(props) {
   const {
     type,
     hasActions,
+    label,
     labelledBy,
     isWrappingContent,
     children
@@ -86,7 +87,12 @@ export function Wrapper(props) {
   );
 
   return (
-    <div role="alert" aria-labelledby={labelledBy} className={classes}>
+    <div
+      role="alert"
+      aria-label={label}
+      aria-labelledby={labelledBy}
+      className={classes}
+    >
       {children}
     </div>
   );
@@ -158,30 +164,12 @@ export function Notification({ innerRef, children }) {
 }
 
 /**
- * @typedef {Object} LabelProps
- * @property {string} [id]
- * @property {any} [children]
- */
-
-/**
- * @param {LabelProps} props
- * @returns {JSX.Element}
- */
-export function Label({ id, children }) {
-  return <Text color={TEXT_COLOR} id={id}>{`${children}: `}</Text>;
-}
-
-/**
  * @param {StyledProps} props
  * @returns {JSX.Element}
  */
 export function Message({ children }) {
   if (typeof children === "string") {
     return <Text color={TEXT_COLOR}>{children}</Text>;
-  }
-
-  if (typeof children === "function") {
-    return children();
   }
 
   return children;
