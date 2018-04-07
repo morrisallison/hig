@@ -21,7 +21,8 @@
     "lint": "eslint ./src/**/*"
   },
   "dependencies": {
-    "hig-react": "^0.29.0-alpha"
+    "hig-react": "^0.29.0-alpha",
+    "react-lifecycles-compat": "^2.0.0"
   },
   "eslintConfig": { "extends": "@hig" },
   "eslintIgnore": ["*.scss", "*.json"]
