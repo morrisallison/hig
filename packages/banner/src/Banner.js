@@ -67,14 +67,26 @@ export default class Banner extends Component {
     return <BannerPresenter {...otherProps}>{children}</BannerPresenter>;
   };
 
-  render() {
-    const { isVisible, actions } = this.props;
+  /**
+   * @param {import("./BannerAnimator").ContainerBag} containerBag
+   */
+  renderContainer = ({ handleReady }) => {
+    const { actions } = this.props;
     const { renderPresenter } = this;
 
     return (
-      <BannerAnimator isVisible={isVisible}>
-        <BannerContainer actions={actions}>{renderPresenter}</BannerContainer>
-      </BannerAnimator>
+      <BannerContainer actions={actions} onReady={handleReady}>
+        {renderPresenter}
+      </BannerContainer>
+    );
+  };
+
+  render() {
+    const { isVisible } = this.props;
+    const { renderContainer } = this;
+
+    return (
+      <BannerAnimator isVisible={isVisible}>{renderContainer}</BannerAnimator>
     );
   }
 }

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {Component} from "react";
 
 import { storiesOf } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
@@ -61,18 +61,43 @@ function getBannerKnobs(props) {
   };
 }
 
-function BannerDemo(props) {
-  const { children, ...otherProps } = getBannerKnobs(props);
+class BannerStory extends Component {
+  state = {
+    toggleBlah: false
+  };
 
-  return (
-    <div style={{ marginBottom: "15px" }}>
-      <Banner {...otherProps}>{children}</Banner>
-    </div>
-  );
-}
+  render() {
+    const { children, ...otherProps } = this.getProps();
 
-function BannerStory({ props }) {
-  return <BannerDemo {...props} />;
+    return (
+      <div>
+        <div style={{ marginBottom: "15px" }}>
+          <Banner {...otherProps}>{children}</Banner>
+        </div>
+        <Button
+          title="Toggle Visibility"
+          onClick={this.handleToggleButtonClick}
+        />
+      </div>
+    );
+  }
+
+  getProps() {
+    const { isVisible, props } = getBannerKnobs(this.props);
+
+    return {
+      ...props,
+      isVisible: this.state.toggleBlah ? !isVisible : isVisible
+    };
+  }
+
+  handleToggleButtonClick = () => {
+    const { toggleBlah } = this.state;
+
+    this.setState({
+      toggleBlah: !toggleBlah
+    });
+  };
 }
 
 const stories = [
