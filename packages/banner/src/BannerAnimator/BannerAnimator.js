@@ -5,8 +5,6 @@ import { polyfill } from "react-lifecycles-compat";
 import { placements, AVAILABLE_PLACEMENTS } from "../placements";
 
 const statuses = {
-  VISIBLE: "VISIBLE",
-  HIDDEN: "HIDDEN",
   COLLAPSED: "COLLAPSED",
   COLLAPSING: "COLLAPSING",
   EXPANDED: "EXPANDED",
@@ -21,81 +19,24 @@ const statuses = {
 
 /**
  * @typedef {Object} BannerAnimatorState
- * @property {string | undefined} status
+ * @property {string} [status]
+ * @property {Object.<string, string>} [style]
  */
-
-function getCollapsingState() {
-  return {
-    status: statuses.COLLAPSING,
-    style: {
-      height: "0",
-      overflow: "hidden"
-    }
-  };
-}
-
-function getCollapsedState() {
-  return {
-    status: statuses.COLLAPSED
-  };
-}
-
-function getHiddenState() {
-  return {
-    status: statuses.HIDDEN,
-    style: {
-      height: "",
-      overflow: ""
-    }
-  };
-}
-
-// function getVisibleState() {
-//   return {
-//     status: statuses.VISIBLE,
-//     style: {
-//       height: "",
-//       overflow: ""
-//     }
-//   };
-// }
-
-function getExpandedState() {
-  return {
-    status: statuses.EXPANDED,
-    style: {
-      height: "",
-      overflow: ""
-    }
-  };
-}
-
-function getExpandingState({ wrapper }) {
-  return {
-    status: statuses.EXPANDING,
-    style: {
-      height: getChildHeight({ wrapper }),
-      overflow: "hidden"
-    }
-  };
-}
-
-/**
- * @param {HTMLDivElement} wrapper
- * @returns {string} Height in pixels
- */
-function getChildHeight(wrapper) {
-  return `${wrapper.firstElementChild.offsetHeight}px`;
-}
 
 /** @type {Component<BannerAnimatorProps, BannerAnimatorState>} */
 class BannerAnimator extends Component {
   /** @type {BannerAnimatorState} */
-  state = {
-    // isVisible: null,
-    // status: null
-  };
+  state = {};
 
+  /** @type {HTMLDivElement} */
+  wrapper;
+
+  /**
+   * @returns {string} Height in pixels
+   */
+  getChildHeight() {
+    return `${this.wrapper.firstElementChild.offsetHeight}px`;
+  }
   /**
    * @param {BannerAnimatorProps} nextProps
    * @param {BannerAnimatorState} prevState
@@ -103,66 +44,127 @@ class BannerAnimator extends Component {
    */
   static getDerivedStateFromProps(nextProps, prevState) {
     console.log("getDerivedStateFromProps");
-    const { isVisible: shouldBeVisible } = nextProps;
-    const { /* isVisible: isCurrentlyVisible, */ status, wrapper } = prevState;
-
-    // if (shouldBeVisible === isCurrentlyVisible) return null;
+    const { isVisible } = nextProps;
+    const { status } = prevState;
 
     switch (status) {
-      case statuses.HIDDEN:
-        return shouldBeVisible ? getCollapsedState() : null;
       case statuses.COLLAPSED:
       case statuses.COLLAPSING:
-        return shouldBeVisible ? getExpandingState({ wrapper }) : null;
+        return isVisible ? { status: statuses.EXPANDING } : null;
       case statuses.EXPANDED:
       case statuses.EXPANDING:
-        return shouldBeVisible ? null : getCollapsingState();
+        return isVisible ? null : { status: statuses.COLLAPSING };
       default:
-        return shouldBeVisible ? getExpandedState() : getHiddenState();
+        return isVisible
+          ? { status: statuses.EXPANDED }
+          : {
+              status: statuses.COLLAPSED,
+              style: {
+                transition: "",
+                overflow: "hidden",
+                height: "0"
+              }
+            };
     }
   }
 
-  // componentDidUpdate(prevProps, prevState) {
-  //   const { status, wrapper } = prevState;
-  //   if (prevState.status === statuses.HIDDEN && status === statuses.COLLAPSED) {
-  //     requestAnimationFrame(() => {
-  //       this.setState(getExpandingState({ wrapper }));
-  //     });
-  //   }
-  // }
+  componentDidUpdate(prevProps, prevState) {
+    const { status: prevStatus } = prevState;
+    const { status } = this.state;
+
+    if (prevStatus === statuses.EXPANDED && status === statuses.COLLAPSING) {
+      requestAnimationFrame(() => {
+        this.setState(
+          {
+            style: {
+              overflow: "hidden",
+              height: this.getChildHeight()
+            }
+          },
+          () => {
+            requestAnimationFrame(() => {
+              this.setState({
+                style: {
+                  transition: "500ms height ease, 500ms transform ease",
+                  overflow: "hidden",
+                  height: "0"
+                }
+              });
+            });
+          }
+        );
+      });
+    }
+
+    if (prevStatus === statuses.COLLAPSING && status === statuses.EXPANDING) {
+      requestAnimationFrame(() => {
+        this.setState({
+          style: {
+            transition: "500ms height ease",
+            overflow: "hidden",
+            height: this.getChildHeight()
+          }
+        });
+      });
+    }
+
+    if (prevStatus === statuses.EXPANDING && status === statuses.COLLAPSING) {
+      requestAnimationFrame(() => {
+        this.setState({
+          style: {
+            transition: "500ms height ease",
+            overflow: "hidden",
+            height: "0"
+          }
+        });
+      });
+    }
+  }
 
   handleReady = () => {
     console.log("handleReady called");
-    const { status, wrapper } = prevState;
+    const { status } = this.state;
 
-    if (prevState.status === statuses.HIDDEN && status === statuses.COLLAPSED) {
-      requestAnimationFrame(() => {
-        this.setState(getExpandingState({ wrapper }));
+    if (status !== statuses.EXPANDING) return;
+
+    requestAnimationFrame(() => {
+      this.setState({
+        style: {
+          transition: "500ms height ease",
+          overflow: "hidden",
+          height: this.getChildHeight()
+        }
       });
-    }
+    });
   };
 
-  handleCollapse() {
-    this.setState(getCollapsedState(), () => {
-      this.setState(getHiddenState());
-    });
-  }
-
-  handleExpand() {
-    this.setState(getExpandedState());
-  }
-
   handleTransitionEnd = event => {
-    const { status, wrapper } = this.state;
+    console.log("handleTransitionEnd called");
 
-    if (event.target !== wrapper) return;
+    if (event.target !== this.wrapper) return;
+
+    const { status } = this.state;
 
     switch (status) {
       case statuses.COLLAPSING:
-        handleCollapse();
+        this.setState({
+          status: statuses.COLLAPSED,
+          style: {
+            transition: "",
+            overflow: "hidden",
+            height: "0"
+          }
+        });
         return;
       case statuses.EXPANDING:
-        handleExpand();
+        this.setState({
+          status: statuses.EXPANDED,
+          style: {
+            transition: "",
+            overflow: "",
+            height: ""
+          }
+        });
         return;
       default:
         return;
@@ -170,7 +172,8 @@ class BannerAnimator extends Component {
   };
 
   refWrapper = wrapper => {
-    this.setState({ wrapper });
+    console.log("refWrapper called");
+    this.wrapper = wrapper;
   };
 
   render() {
@@ -178,17 +181,13 @@ class BannerAnimator extends Component {
     const { status, style } = this.state;
     const { handleReady, refWrapper } = this;
 
-    if (status === statuses.HIDDEN) {
-      return null;
-    }
-
     return (
       <div
         onTransitionEnd={this.handleTransitionEnd}
-        style={{ transition: "500ms height ease", ...style }}
+        style={style}
         ref={refWrapper}
       >
-        {children({ handleReady })}
+        {status === statuses.COLLAPSED ? null : children({ handleReady })}
       </div>
     );
   }
