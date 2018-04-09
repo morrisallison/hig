@@ -18,6 +18,7 @@ import {
 /**
  * @typedef {Object} BannerAnimatorProps
  * @property {boolean} [isVisible]
+ * @property {string} [placement]
  * @property {function(ContainerBag): JSX.Element} children
  */
 
@@ -105,9 +106,11 @@ class BannerAnimator extends Component {
   };
 
   handleTransitionEnd = event => {
-    console.log("handleTransitionEnd called");
+    console.log("handleTransitionEnd called", event.target);
 
     if (event.target !== this.state.wrapper) return;
+
+    console.log("handleTransitionEnd called2");
 
     const { status } = this.state;
 
@@ -133,7 +136,7 @@ class BannerAnimator extends Component {
   };
 
   render() {
-    const { children: renderChildren } = this.props;
+    const { children: renderChildren, placement } = this.props;
     const { status, wrapperStyle, innerWrapperStyle } = this.state;
     const {
       handleReady,
@@ -143,9 +146,13 @@ class BannerAnimator extends Component {
     } = this;
     const children =
       status === statuses.COLLAPSED ? null : renderChildren({ handleReady });
-
+    console.log("render", { placement });
     return (
-      <div style={wrapperStyle} onTransitionEnd={handleTransitionEnd}>
+      <div
+        style={wrapperStyle}
+        onTransitionEnd={handleTransitionEnd}
+        ref={refWrapper}
+      >
         <div style={innerWrapperStyle} ref={refInnerWrapper}>
           {children}
         </div>

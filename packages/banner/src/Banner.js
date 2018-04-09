@@ -82,11 +82,13 @@ export default class Banner extends Component {
   };
 
   render() {
-    const { isVisible } = this.props;
+    const { isVisible, placement } = this.props;
     const { renderContainer } = this;
 
     return (
-      <BannerAnimator isVisible={isVisible}>{renderContainer}</BannerAnimator>
+      <BannerAnimator isVisible={isVisible} placement={placement}>
+        {renderContainer}
+      </BannerAnimator>
     );
   }
 }

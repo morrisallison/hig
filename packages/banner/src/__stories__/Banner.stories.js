@@ -19,7 +19,7 @@ const knobGroupIds = {
 };
 
 const knobLabels = {
-  type: "Style",
+  type: "Variants",
   children: "Message",
   placement: "Placement",
   isVisible: "Visible",
