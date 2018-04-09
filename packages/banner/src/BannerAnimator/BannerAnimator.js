@@ -43,7 +43,6 @@ class BannerAnimator extends Component {
    * @returns {Object | null}
    */
   static getDerivedStateFromProps(nextProps, prevState) {
-    console.log("getDerivedStateFromProps");
     const { isVisible } = nextProps;
     const { status } = prevState;
 
@@ -98,7 +97,6 @@ class BannerAnimator extends Component {
   }
 
   handleReady = () => {
-    console.log("handleReady called");
     const { status } = this.state;
 
     if (status === statuses.EXPANDING) {
@@ -107,14 +105,11 @@ class BannerAnimator extends Component {
   };
 
   handleTransitionEnd = event => {
-    console.log("handleTransitionEnd called", event.target);
     const { isOverlay } = this.props;
     const { wrapper, innerWrapper } = this.state;
     const expectedTarget = isOverlay ? innerWrapper : wrapper;
 
     if (event.target !== expectedTarget) return;
-
-    console.log("handleTransitionEnd called2");
 
     const { status } = this.state;
 
@@ -130,12 +125,10 @@ class BannerAnimator extends Component {
   };
 
   refWrapper = wrapper => {
-    console.log("refWrapper called");
     this.setState({ wrapper });
   };
 
   refInnerWrapper = innerWrapper => {
-    console.log("refInnerWrapper called");
     this.setState({ innerWrapper });
   };
 
@@ -150,7 +143,6 @@ class BannerAnimator extends Component {
     } = this;
     const children =
       status === statuses.COLLAPSED ? null : renderChildren({ handleReady });
-    console.log("render", { placement });
     return (
       <div
         style={wrapperStyle}

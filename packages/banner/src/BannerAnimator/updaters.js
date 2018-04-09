@@ -21,12 +21,10 @@ const innerWrapperStyleReset = {
 };
 
 function getWrapperTransition({ isOverlay }) {
-  console.info("getWrapperTransition called", isOverlay);
   return isOverlay ? "" : `${TRANSITION_DURATION}ms height ease`;
 }
 
 function getInnerWrapperTransition({ isOverlay }) {
-  console.log("innerWrapperTransition called");
   return isOverlay ? `${TRANSITION_DURATION}ms transform ${easeOutBack}` : "";
 }
 
@@ -35,7 +33,6 @@ function getOverlayWrapperHeight({ innerWrapper }) {
 }
 
 function getExpandedWrapperHeight({ isOverlay, innerWrapper }) {
-  console.log("getExpandedWrapperHeight called");
   const wrapperHeight = isOverlay
     ? getOverlayWrapperHeight({ innerWrapper })
     : innerWrapper.offsetHeight;
@@ -53,7 +50,6 @@ function getCollapsedWrapperHeight({ isOverlay, innerWrapper }) {
 
 function getWrapperAlignItems({ isOverlay, placement }) {
   const isBottomPlacement = placement === placements.BOTTOM;
-  console.log("getWrapperAlignItems called", { isBottomPlacement });
 
   if (isOverlay) {
     return isBottomPlacement ? "flex-end" : "flex-start";
@@ -63,7 +59,6 @@ function getWrapperAlignItems({ isOverlay, placement }) {
 }
 
 function getCollapsedInnerTransform({ isOverlay, innerWrapper, placement }) {
-  console.warn("getCollapsedInnerTransform called", { isOverlay, placement });
   if (!isOverlay) return "";
 
   const isBottomPlacement = placement === placements.BOTTOM;
@@ -75,17 +70,14 @@ function getCollapsedInnerTransform({ isOverlay, innerWrapper, placement }) {
 }
 
 export function startExpand() {
-  console.log("startExpand called");
   return { status: statuses.EXPANDING };
 }
 
 export function startCollapse() {
-  console.log("startCollapse called");
   return { status: statuses.COLLAPSING };
 }
 
 export function endExpand() {
-  console.log("endExpand called");
   return {
     status: statuses.EXPANDED,
     wrapperStyle: wrapperStyleReset,
@@ -94,7 +86,6 @@ export function endExpand() {
 }
 
 export function endCollapse({ innerWrapper }, { isOverlay, placement }) {
-  console.log("endCollapse called");
   return {
     status: statuses.COLLAPSED,
     wrapperStyle: {
@@ -117,7 +108,6 @@ export function endCollapse({ innerWrapper }, { isOverlay, placement }) {
 }
 
 export function prepareCollapse({ innerWrapper }, { isOverlay, placement }) {
-  console.log("prepareCollapse called");
   return {
     wrapperStyle: {
       display: "flex",
@@ -134,7 +124,6 @@ export function prepareCollapse({ innerWrapper }, { isOverlay, placement }) {
 }
 
 export function animateCollapse({ innerWrapper }, { isOverlay, placement }) {
-  console.log("animateCollapse called");
   return {
     wrapperStyle: {
       display: "flex",
@@ -156,7 +145,6 @@ export function animateCollapse({ innerWrapper }, { isOverlay, placement }) {
 }
 
 export function animateExpand({ innerWrapper }, { isOverlay, placement }) {
-  console.log("animateExpand called");
   return {
     wrapperStyle: {
       display: "flex",
