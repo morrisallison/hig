@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 
 import { storiesOf } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
@@ -29,6 +29,7 @@ const knobLabels = {
 };
 
 function getBannerKnobs(props) {
+  console.log("getBannerKnobs", props);
   const {
     type,
     placement,
@@ -69,6 +70,8 @@ class BannerStory extends Component {
   render() {
     const { children, ...otherProps } = this.getProps();
 
+    console.log("story render", otherProps);
+
     return (
       <div>
         <div style={{ marginBottom: "15px" }}>
@@ -83,11 +86,14 @@ class BannerStory extends Component {
   }
 
   getProps() {
-    const { isVisible, props } = getBannerKnobs(this.props);
+    console.log("getProps", this.props);
+    const { isVisible, ...otherProps } = getBannerKnobs(this.props);
+
+    console.log("getProps2", otherProps);
 
     return {
-      ...props,
-      isVisible: this.state.toggleBlah ? !isVisible : isVisible
+      isVisible: this.state.toggleBlah ? !isVisible : isVisible,
+      ...otherProps
     };
   }
 
@@ -140,5 +146,9 @@ const stories = [
 const bannerStories = storiesOf("Banner", module);
 
 stories.forEach(({ description, props }) => {
-  bannerStories.add(description, () => <BannerStory props={props} />);
+  const { children, ...otherProps } = props;
+
+  bannerStories.add(description, () => (
+    <BannerStory {...otherProps}>{children}</BannerStory>
+  ));
 });

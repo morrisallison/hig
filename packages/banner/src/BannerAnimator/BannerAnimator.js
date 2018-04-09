@@ -163,7 +163,7 @@ class BannerAnimator extends Component {
 
 BannerAnimator.defaultProps = {
   isVisible: true,
-  placement: placements.TOP
+  placement: placements.STANDARD
 };
 
 BannerAnimator.propTypes = {
