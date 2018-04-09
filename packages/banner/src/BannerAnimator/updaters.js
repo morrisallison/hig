@@ -4,14 +4,21 @@ import statuses from "./statuses";
 const TRANSITION_DURATION = 500;
 
 const wrapperStyleReset = {
+  flex: "",
+  alignItems: "",
   transition: "",
   overflow: "",
   height: ""
 };
 
 const innerWrapperStyleReset = {
-  transition: "",
-  transform: ""
+  // transition: "",
+  // transform: ""
+};
+
+const wrapperBase = {
+  display: "flex",
+  alignItems: "flex-end"
 };
 
 function wrapperTransition() {
@@ -29,6 +36,10 @@ function getExpandedWrapperHeight({ innerWrapper }) {
   const innerWrapperHeight = innerWrapper.offsetHeight;
 
   return `${innerWrapperHeight}px`;
+}
+
+function getWrapperAlignItems({ placement }) {
+  return placement === placements.BOTTOM ? "flex-start" : "flex-end";
 }
 
 function getCollapsedInnerTransform({ innerWrapper, placement }) {
@@ -64,21 +75,25 @@ export function endCollapse({ innerWrapper }, { placement }) {
   return {
     status: statuses.COLLAPSED,
     wrapperStyle: {
+      display: "",
+      alignItems: "",
       transition: "",
       overflow: "hidden",
       height: "0"
     },
     innerWrapperStyle: {
-      transition: "",
-      transform: getCollapsedInnerTransform({ innerWrapper, placement })
+      // transition: "",
+      // transform: getCollapsedInnerTransform({ innerWrapper, placement })
     }
   };
 }
 
-export function prepareCollapse({ innerWrapper }) {
+export function prepareCollapse({ innerWrapper }, { placement }) {
   console.log("prepareCollapse called");
   return {
     wrapperStyle: {
+      display: "flex",
+      alignItems: getWrapperAlignItems({ placement }),
       transition: "",
       overflow: "hidden",
       height: getExpandedWrapperHeight({ innerWrapper })
@@ -91,13 +106,15 @@ export function animateCollapse({ innerWrapper }, { placement }) {
   console.log("animateCollapse called");
   return {
     wrapperStyle: {
+      display: "flex",
+      alignItems: getWrapperAlignItems({ placement }),
       transition: wrapperTransition(),
       overflow: "hidden",
       height: "0"
     },
     innerWrapperStyle: {
-      transition: innerWrapperTransition(),
-      transform: getCollapsedInnerTransform({ innerWrapper, placement })
+      // transition: innerWrapperTransition(),
+      // transform: getCollapsedInnerTransform({ innerWrapper, placement })
     }
   };
 }
@@ -106,13 +123,15 @@ export function animateExpand({ innerWrapper }) {
   console.log("animateExpand called");
   return {
     wrapperStyle: {
+      display: "flex",
+      alignItems: getWrapperAlignItems({ placement }),
       transition: wrapperTransition(),
       overflow: "hidden",
       height: getExpandedWrapperHeight({ innerWrapper })
     },
     innerWrapperStyle: {
-      transition: innerWrapperTransition(),
-      transform: ""
+      // transition: innerWrapperTransition(),
+      // transform: ""
     }
   };
 }

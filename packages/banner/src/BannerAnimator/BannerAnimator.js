@@ -18,6 +18,7 @@ import {
 /**
  * @typedef {Object} BannerAnimatorProps
  * @property {boolean} [isVisible]
+ * @property {boolean} [isOverlay]
  * @property {string} [placement]
  * @property {function(ContainerBag): JSX.Element} children
  */
@@ -163,12 +164,15 @@ class BannerAnimator extends Component {
 
 BannerAnimator.defaultProps = {
   isVisible: true,
+  isOverlay: true,
   placement: placements.STANDARD
 };
 
 BannerAnimator.propTypes = {
-  /** Animation; Determines the visibility of the banner */
+  /** Determines the visibility of the banner */
   isVisible: PropTypes.bool.isRequired,
+  /** Determines the type of animation used */
+  isOverlay: PropTypes.bool.isRequired,
   /** Determines the direction of the animation */
   placement: PropTypes.oneOf(AVAILABLE_PLACEMENTS),
   /** A render prop, that renders the component to be animated */
