@@ -23,6 +23,7 @@ const knobLabels = {
   children: "Message",
   placement: "Placement",
   isVisible: "Visible",
+  isOverlay: "Overlay",
   label: "Label",
   dismissButtonTitle: "Dismiss title",
   onDismiss: "Banner dismissed"
@@ -35,6 +36,7 @@ function getBannerKnobs(props) {
     placement,
     children,
     isVisible = true,
+    isOverlay = false,
     label,
     dismissButtonTitle,
     onDismiss,
@@ -52,6 +54,7 @@ function getBannerKnobs(props) {
       knobGroupIds.animation
     ),
     isVisible: boolean(knobLabels.isVisible, isVisible, knobGroupIds.animation),
+    isOverlay: boolean(knobLabels.isOverlay, isOverlay, knobGroupIds.animation),
     label: text(knobLabels.label, label, knobLabels.a11y),
     dismissButtonTitle: text(
       knobLabels.dismissButtonTitle,
@@ -63,24 +66,48 @@ function getBannerKnobs(props) {
 }
 
 class BannerStory extends Component {
+  static toggleButtonStyle = {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    height: "100vh"
+  };
+
+  static baseBannerWrapperStyle = {
+    position: "fixed",
+    left: "0",
+    right: "0"
+  };
+
+  static getBannerWrapperStyle({ placement }) {
+    if (placement === Banner.placements.BOTTOM) {
+      return { ...BannerStory.baseBannerWrapperStyle, bottom: "0" };
+    }
+
+    return { ...BannerStory.baseBannerWrapperStyle, top: "0" };
+  }
+
   state = {
-    toggleBlah: false
+    isTogglingVisibility: false
   };
 
   render() {
     const { children, ...otherProps } = this.getProps();
-
+    const { placement } = otherProps;
     console.log("story render", otherProps);
+    const bannerWrapperStyle = BannerStory.getBannerWrapperStyle({ placement });
 
     return (
       <div>
-        <div style={{ marginBottom: "15px" }}>
+        <div style={bannerWrapperStyle}>
           <Banner {...otherProps}>{children}</Banner>
         </div>
-        <Button
-          title="Toggle Visibility"
-          onClick={this.handleToggleButtonClick}
-        />
+        <div style={BannerStory.toggleButtonStyle}>
+          <Button
+            title="Toggle Visibility"
+            onClick={this.handleToggleButtonClick}
+          />
+        </div>
       </div>
     );
   }
@@ -92,16 +119,16 @@ class BannerStory extends Component {
     console.log("getProps2", otherProps);
 
     return {
-      isVisible: this.state.toggleBlah ? !isVisible : isVisible,
+      isVisible: this.state.isTogglingVisibility ? !isVisible : isVisible,
       ...otherProps
     };
   }
 
   handleToggleButtonClick = () => {
-    const { toggleBlah } = this.state;
+    const { isTogglingVisibility } = this.state;
 
     this.setState({
-      toggleBlah: !toggleBlah
+      isTogglingVisibility: !isTogglingVisibility
     });
   };
 }

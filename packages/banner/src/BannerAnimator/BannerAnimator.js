@@ -108,8 +108,11 @@ class BannerAnimator extends Component {
 
   handleTransitionEnd = event => {
     console.log("handleTransitionEnd called", event.target);
+    const { isOverlay } = this.props;
+    const { wrapper, innerWrapper } = this.state;
+    const expectedTarget = isOverlay ? innerWrapper : wrapper;
 
-    if (event.target !== this.state.wrapper) return;
+    if (event.target !== expectedTarget) return;
 
     console.log("handleTransitionEnd called2");
 

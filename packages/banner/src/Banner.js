@@ -19,6 +19,7 @@ import BannerPresenter from "./BannerPresenter";
  * @property {string} [dismissButtonTitle]
  * @property {Function} [onDismiss]
  * @property {boolean} [isVisible]
+ * @property {boolean} [isOverlay]
  * @property {any} [children]
  */
 
@@ -50,6 +51,8 @@ export default class Banner extends Component {
     onDismiss: PropTypes.func,
     /** Animation; Determines the visibility of the banner */
     isVisible: PropTypes.bool,
+    /** Animation; Determines the type of animation */
+    isOverlay: PropTypes.bool,
     /** The displayed message */
     children: PropTypes.string
   };
@@ -82,11 +85,15 @@ export default class Banner extends Component {
   };
 
   render() {
-    const { isVisible, placement } = this.props;
+    const { isVisible, isOverlay, placement } = this.props;
     const { renderContainer } = this;
 
     return (
-      <BannerAnimator isVisible={isVisible} placement={placement}>
+      <BannerAnimator
+        isVisible={isVisible}
+        isOverlay={isOverlay}
+        placement={placement}
+      >
         {renderContainer}
       </BannerAnimator>
     );

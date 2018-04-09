@@ -1,7 +1,10 @@
 import { placement, placements } from "../placements";
 import statuses from "./statuses";
 
-const TRANSITION_DURATION = 500;
+const TRANSITION_DURATION = 300;
+const OVERLAY_HEIGHT_BUFFER = 50;
+
+const easeOutBack = "cubic-bezier(0.175, 0.885, 0.32, 1.275)";
 
 const wrapperStyleReset = {
   flex: "",
@@ -12,41 +15,61 @@ const wrapperStyleReset = {
 };
 
 const innerWrapperStyleReset = {
-  // transition: "",
-  // transform: ""
+  flex: "",
+  transition: "",
+  transform: ""
 };
 
-const wrapperBase = {
-  display: "flex",
-  alignItems: "flex-end"
-};
-
-function wrapperTransition() {
-  console.log("wrapperTransition called");
-  return `${TRANSITION_DURATION}ms height ease`;
+function getWrapperTransition({ isOverlay }) {
+  console.info("getWrapperTransition called", isOverlay);
+  return isOverlay ? "" : `${TRANSITION_DURATION}ms height ease`;
 }
 
-function innerWrapperTransition() {
+function getInnerWrapperTransition({ isOverlay }) {
   console.log("innerWrapperTransition called");
-  return `${TRANSITION_DURATION}ms transform ease`;
+  return isOverlay ? `${TRANSITION_DURATION}ms transform ${easeOutBack}` : "";
 }
 
-function getExpandedWrapperHeight({ innerWrapper }) {
+function getOverlayWrapperHeight({ innerWrapper }) {
+  return innerWrapper.offsetHeight + OVERLAY_HEIGHT_BUFFER;
+}
+
+function getExpandedWrapperHeight({ isOverlay, innerWrapper }) {
   console.log("getExpandedWrapperHeight called");
-  const innerWrapperHeight = innerWrapper.offsetHeight;
+  const wrapperHeight = isOverlay
+    ? getOverlayWrapperHeight({ innerWrapper })
+    : innerWrapper.offsetHeight;
 
-  return `${innerWrapperHeight}px`;
+  return `${wrapperHeight}px`;
 }
 
-function getWrapperAlignItems({ placement }) {
-  return placement === placements.BOTTOM ? "flex-start" : "flex-end";
+function getCollapsedWrapperHeight({ isOverlay, innerWrapper }) {
+  if (!isOverlay) return "0";
+
+  const wrapperHeight = getOverlayWrapperHeight({ innerWrapper });
+
+  return `${wrapperHeight}px`;
 }
 
-function getCollapsedInnerTransform({ innerWrapper, placement }) {
-  console.log({ placement });
-  console.log("getCollapsedInnerTransform called");
-  const modifier = placement === placements.BOTTOM ? 1 : -1;
-  const innerWrapperOffset = innerWrapper.offsetHeight * modifier;
+function getWrapperAlignItems({ isOverlay, placement }) {
+  const isBottomPlacement = placement === placements.BOTTOM;
+  console.log("getWrapperAlignItems called", { isBottomPlacement });
+
+  if (isOverlay) {
+    return isBottomPlacement ? "flex-end" : "flex-start";
+  }
+
+  return isBottomPlacement ? "flex-start" : "flex-end";
+}
+
+function getCollapsedInnerTransform({ isOverlay, innerWrapper, placement }) {
+  console.warn("getCollapsedInnerTransform called", { isOverlay, placement });
+  if (!isOverlay) return "";
+
+  const isBottomPlacement = placement === placements.BOTTOM;
+  const modifier = isBottomPlacement ? 1 : -1;
+  const offset = isBottomPlacement ? OVERLAY_HEIGHT_BUFFER : 0;
+  const innerWrapperOffset = innerWrapper.offsetHeight * modifier + offset;
 
   return `translateY(${innerWrapperOffset}px)`;
 }
@@ -70,7 +93,7 @@ export function endExpand() {
   };
 }
 
-export function endCollapse({ innerWrapper }, { placement }) {
+export function endCollapse({ innerWrapper }, { isOverlay, placement }) {
   console.log("endCollapse called");
   return {
     status: statuses.COLLAPSED,
@@ -79,59 +102,73 @@ export function endCollapse({ innerWrapper }, { placement }) {
       alignItems: "",
       transition: "",
       overflow: "hidden",
-      height: "0"
+      height: getCollapsedWrapperHeight({ isOverlay, innerWrapper })
     },
     innerWrapperStyle: {
-      // transition: "",
-      // transform: getCollapsedInnerTransform({ innerWrapper, placement })
+      flex: "",
+      transition: "",
+      transform: getCollapsedInnerTransform({
+        isOverlay,
+        innerWrapper,
+        placement
+      })
     }
   };
 }
 
-export function prepareCollapse({ innerWrapper }, { placement }) {
+export function prepareCollapse({ innerWrapper }, { isOverlay, placement }) {
   console.log("prepareCollapse called");
   return {
     wrapperStyle: {
       display: "flex",
-      alignItems: getWrapperAlignItems({ placement }),
+      alignItems: getWrapperAlignItems({ isOverlay, placement }),
       transition: "",
       overflow: "hidden",
-      height: getExpandedWrapperHeight({ innerWrapper })
-    },
-    innerWrapperStyle: innerWrapperStyleReset
-  };
-}
-
-export function animateCollapse({ innerWrapper }, { placement }) {
-  console.log("animateCollapse called");
-  return {
-    wrapperStyle: {
-      display: "flex",
-      alignItems: getWrapperAlignItems({ placement }),
-      transition: wrapperTransition(),
-      overflow: "hidden",
-      height: "0"
+      height: getExpandedWrapperHeight({ isOverlay, innerWrapper })
     },
     innerWrapperStyle: {
-      // transition: innerWrapperTransition(),
-      // transform: getCollapsedInnerTransform({ innerWrapper, placement })
+      flex: "1",
+      ...innerWrapperStyleReset
     }
   };
 }
 
-export function animateExpand({ innerWrapper }) {
+export function animateCollapse({ innerWrapper }, { isOverlay, placement }) {
+  console.log("animateCollapse called");
+  return {
+    wrapperStyle: {
+      display: "flex",
+      alignItems: getWrapperAlignItems({ isOverlay, placement }),
+      transition: getWrapperTransition({ isOverlay }),
+      overflow: "hidden",
+      height: getCollapsedWrapperHeight({ isOverlay, innerWrapper })
+    },
+    innerWrapperStyle: {
+      flex: "1",
+      transition: getInnerWrapperTransition({ isOverlay }),
+      transform: getCollapsedInnerTransform({
+        isOverlay,
+        innerWrapper,
+        placement
+      })
+    }
+  };
+}
+
+export function animateExpand({ innerWrapper }, { isOverlay, placement }) {
   console.log("animateExpand called");
   return {
     wrapperStyle: {
       display: "flex",
-      alignItems: getWrapperAlignItems({ placement }),
-      transition: wrapperTransition(),
+      alignItems: getWrapperAlignItems({ isOverlay, placement }),
+      transition: getWrapperTransition({ isOverlay }),
       overflow: "hidden",
-      height: getExpandedWrapperHeight({ innerWrapper })
+      height: getExpandedWrapperHeight({ isOverlay, innerWrapper })
     },
     innerWrapperStyle: {
-      // transition: innerWrapperTransition(),
-      // transform: ""
+      flex: "1",
+      transition: getInnerWrapperTransition({ isOverlay }),
+      transform: ""
     }
   };
 }
