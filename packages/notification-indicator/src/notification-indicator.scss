@@ -1,0 +1,48 @@
+@import "~@hig/styles/mixins/base.scss";
+@import "~@hig/styles/mixins/colors.scss";
+
+.hig__notification-indicator {
+  // .hig__icon {
+  //   &:hover {
+  //     fill: color(hig-blue-50);
+  //   }
+  // }
+
+  // .hig__flyout__panel {
+  //   padding: 0;
+  //   width: 320px;
+  // }
+
+  // .hig__global-nav__top-nav__shortcut {
+  //   top: 50%;
+  //   position: relative;
+  //   transform: translateY(-50%);
+  //   padding-right: 6px;
+  // }
+
+  // .hig__flyout__container {
+  //   top: 55px;
+  //   right: -8px;
+  // }
+}
+
+.hig__notification-indicator__unread-marker {
+  display: block;
+  position: absolute;
+  left: 24px;
+  top: 17px;
+  padding: 0 3px;
+  height: 13px;
+  font-size: 11px;
+  line-height: 13px;
+  border: 1px solid color(hig-white);
+  z-index: 1;
+  color: color(hig-white);
+  background-color: color(hig-blue-50);
+  border-radius: 4px;
+  pointer-events: none;
+
+  &--hidden {
+    display: none;
+  }
+}

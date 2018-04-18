@@ -1,11 +1,17 @@
-@import '~@hig/styles/mixins/colors.scss';
-@import '~@hig/styles/mixins/base.scss';
+@import "~@hig/styles/mixins/colors.scss";
+@import "~@hig/styles/mixins/base.scss";
 
-.hig__icon-button {
-  display: inline-block;
+/**
+ * These styles conflict with those in the vanilla package.
+ * The "v2" suffix is used to version the CSS until,
+ * CSS-in-JS or CSS modules are adopted.
+ */
+.hig__icon-button-v2 {
+  display: inline-flex;
   position: relative;
+  justify-content: center;
   cursor: pointer;
-  @include vendor-prefix('box-sizing', 'border-box');
+  @include vendor-prefix("box-sizing", "border-box");
 
   border: 1px solid color(hig-cool-gray-30);
   border-radius: 4px;
@@ -16,10 +22,6 @@
   line-height: 36px;
   min-width: 36px;
   font-size: 14px;
-
-  button {
-    -webkit-text-align: center;
-  }
 
   svg * {
     fill: color(hig-cool-gray-60);
@@ -37,7 +39,7 @@
       border-color: transparent;
       background-color: transparent;
       svg * {
-        fill: color(hig-turquoise-50)
+        fill: color(hig-turquoise-50);
       }
     }
 
@@ -46,7 +48,7 @@
       background-color: transparent;
       border-color: transparent;
       svg * {
-        fill: color(hig-slate-40)
+        fill: color(hig-slate-40);
       }
     }
   }
@@ -77,7 +79,8 @@
     border-color: color(hig-cool-gray-20);
     color: color(hig-cool-gray-30);
 
-    &:hover, &:focus {
+    &:hover,
+    &:focus {
       background: none;
       border-color: color(hig-cool-gray-10);
     }
@@ -91,8 +94,7 @@
     &.hig__icon-button--flat:focus,
     &.hig__icon-button--transparent,
     &.hig__icon-button--transparent:hover,
-    &.hig__icon-button--transparent:focus,
-    {
+    &.hig__icon-button--transparent:focus {
       border-color: transparent;
     }
   }
@@ -101,5 +103,6 @@
 .hig__icon-button__icon {
   @include vendor-prefix(transform, translateX(-50%) translateY(-50%));
   position: absolute;
-  top: 50%; left: 50%;
+  top: 50%;
+  left: 50%;
 }

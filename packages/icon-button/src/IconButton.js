@@ -16,7 +16,7 @@ export default class IconButton extends Component {
 
   render() {
     const iconButtonClasses = cx(
-      "hig__icon-button",
+      "hig__icon-button-v2",
       `hig__icon-button--${this.props.type}`,
       { "hig__icon-button--disabled": this.props.disabled }
     );

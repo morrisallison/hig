@@ -1,7 +1,7 @@
 @import '~basics/colors/colors.scss';
 @import '~helpers/css/mixins/base.scss';
-.hig__notifications {
 
+.hig__notifications {
   .hig__icon {
     &:hover {
       fill: color(hig-blue-50);
@@ -23,7 +23,6 @@
     right: -8px;
   }
 }
-
 
 .hig__notifications__unread-messages-count {
   pointer-events: none;
