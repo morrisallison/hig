@@ -1,0 +1,39 @@
+@import '~@hig/styles/tokens/colors.scss';
+
+.hig__notifications__header {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 16px;
+  padding: 12px 24px 16px;
+  border-bottom: 1px solid #d4dbe1;
+}
+
+.hig__notifications__list-content {
+  overflow-y: auto;
+  border-bottom: 1px solid color(hig-cool-gray-20);
+
+  &:empty {
+    border-bottom: none;
+  }
+}
+
+.hig__notifications__list-content--loaded {
+  &:empty {
+    max-height: 193px;
+    height: 193px;
+
+    &:before {
+      content: url("./bell.svg");
+      display: flex;
+      justify-content: center;
+      padding: 24px 0;
+    }
+
+    &:after {
+      content: 'You currently have no notifications';
+      display: flex;
+      justify-content: center;
+      color: color(hig-gray-40);
+    }
+  }
+}

@@ -3,9 +3,9 @@ import IconButton, { types } from "@hig/icon-button";
 import { names } from "@hig/icon";
 import cx from "classnames";
 
-import "./notification-indicator.scss";
+import "./notifications-indicator.scss";
 
-export default class NotificationIndicator extends Component {
+export default class NotificationsIndicator extends Component {
   render() {
     const { unreadCount, ...otherProps } = this.props;
     const indicatorClasses = cx("hig__notification-indicator__unread-marker", {

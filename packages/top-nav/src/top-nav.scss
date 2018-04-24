@@ -49,7 +49,8 @@
   display: flex;
   cursor: pointer;
 
-  > img {
+  > img,
+  > svg {
     height: 24px;
     width: auto;
   }

@@ -1,77 +1,41 @@
 import React from "react";
 import { storiesOf } from "@storybook/react";
-import { Notification } from "hig-react";
+import { Notification } from "@hig/notifications-flyout";
 
 import TopNav from "../index";
 
+import accountLogo from "./accounts-logo.svg";
+
 const storybook = storiesOf("TopNav", module);
 
-storybook.add("default", () => (
+storybook.add("accounts", () => (
   <TopNav
     logo={
-      <TopNav.LogoImage
-        link="https://google.com"
-        src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png"
-        label="Google"
-        title="Google"
+      <TopNav.Logo
+        label="Autodesk Accounts"
+        title="Autodesk Accounts"
+        link="https://autodesk.com"
+        dangerouslySetInnerHTML={{ __html: accountLogo }}
       />
     }
     rightActions={
       <TopNav.DefaultActions
         profileName="Peter Parker"
-        profileEmail="spiderman@avengers.us"
-        onSettingsButtonClick={() => {
-          console.log("onSettingsButtonClick");
-        }}
-        onSignOutButtonClick={() => {
-          console.log("onSignOutButtonClick");
-        }}
-        profileSettingsButtonText="Profile Settings"
-        profileSignOutButtonText="Sign Out"
-        unreadCount={0}
-        notifications={[<Notification>Hello world</Notification>]}
+        notificationsUnreadCount={1}
+        notifications={[
+          <Notification key="1" id="1">
+            Hello world
+          </Notification>
+        ]}
         helpContent={
           <div>
             <h3>Help</h3>
             <p>You can put what ever you want in here.</p>
           </div>
         }
-      />
-    }
-  />
-));
-
-storybook.add("leftActions", () => (
-  <TopNav
-    leftActions={
-      <TopNav.Interactions>
-        <TopNav.MenuAction />
-      </TopNav.Interactions>
-    }
-    logo={
-      <TopNav.LogoImage
-        link="https://google.com"
-        src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png"
-        label="Google"
-        title="Google"
-      />
-    }
-    rightActions={
-      <TopNav.DefaultActions
-        profileName="Peter Parker"
-        profileEmail="spiderman@avengers.us"
-        onSettingsButtonClick={() => {
-          console.log("onSettingsButtonClick");
-        }}
-        onSignOutButtonClick={() => {
-          console.log("onSignOutButtonClick");
-        }}
-        profileSettingsButtonText="Profile Settings"
-        profileSignOutButtonText="Sign Out"
-        notifications={null}
-        helpContent={
+        profileContent={
           <div>
-            <h3>Help</h3>
+            <h3>Profile</h3>
             <p>You can put what ever you want in here.</p>
           </div>
         }
