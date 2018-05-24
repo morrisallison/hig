@@ -2,6 +2,7 @@ const { extractArchive } = require("./_archive");
 
 async function start() {
   console.log("Unpacking dependencies...");
+
   return extractArchive("dependencies.tar.gz");
 }
 

@@ -33,7 +33,7 @@ async function createArchive(fileGlobs, archiveFilename) {
 async function extractArchive(archiveFilename) {
   const archivePath = getArchivePath(archiveFilename);
   const reader = fs.createReadStream(archivePath);
-  const writer = tarPack.unpack(BASE_PATH);
+  const writer = tarPack.unpack(BASE_PATH, { strip: 0, keepFiles: true });
 
   reader.pipe(writer);
 
@@ -44,4 +44,4 @@ async function extractArchive(archiveFilename) {
   });
 }
 
-module.exports = { createArchive, unpackArchive };
+module.exports = { createArchive, extractArchive };
