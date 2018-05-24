@@ -11,12 +11,22 @@
     "create-dependency-hash": "cat yarn.lock > .dependency-hash && ls ./packages >> .dependency-hash",
     "lint": "lerna run lint --stream",
     "publish-canary": "lerna publish --canary --yes --exact",
-    "update-packages": "lerna publish --skip-npm"
+    "update-packages": "lerna publish --skip-npm",
+    "extract": "concurrently 'yarn run extract:builds' 'yarn run extract:dependencies'",
+    "extract:builds": "node extract-builds.js",
+    "extract:dependencies": "node extract-dependencies.js",
+    "archive:builds": "node archive-builds.js",
+    "archive:dependencies": "node archive-dependencies.js"
   },
   "devDependencies": {
+    "archiver": "^2.1.1",
+    "concurrently": "^3.5.1",
+    "glob": "^7.1.2",
+    "glob-stream": "^6.1.0",
     "lerna": "^2.9.0",
     "node-fetch": "^1.7.3",
-    "registry-url": "^3.1.0"
+    "registry-url": "^3.1.0",
+    "tar-pack": "^3.4.1"
   },
   "workspaces": [
     "packages/*"
