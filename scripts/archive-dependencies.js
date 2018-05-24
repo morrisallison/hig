@@ -6,8 +6,8 @@ async function start() {
   const archivePath = await createArchive(
     [
       ".dependency-hash",
-      "node_modules/!(@hig|hig-*)/**/*",
-      "packages/*/node_modules/!(@hig|hig-*)/**/*"
+      "node_modules/**/*",
+      "packages/*/node_modules/**/*"
     ],
     "dependencies.tar.gz"
   );

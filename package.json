@@ -13,10 +13,10 @@
     "publish-canary": "lerna publish --canary --yes --exact",
     "update-packages": "lerna publish --skip-npm",
     "extract": "concurrently 'yarn run extract:builds' 'yarn run extract:dependencies'",
-    "extract:builds": "node extract-builds.js",
-    "extract:dependencies": "node extract-dependencies.js",
-    "archive:builds": "node archive-builds.js",
-    "archive:dependencies": "node archive-dependencies.js"
+    "extract:builds": "node scripts/extract-builds.js",
+    "extract:dependencies": "node scripts/extract-dependencies.js",
+    "archive:builds": "node scripts/archive-builds.js",
+    "archive:dependencies": "node scripts/archive-dependencies.js"
   },
   "devDependencies": {
     "archiver": "^2.1.1",

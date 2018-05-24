@@ -6,8 +6,8 @@ const tarPack = require("tar-pack");
 const util = require("util");
 
 const BASE_PATH = path.resolve(__dirname, "..");
-const PACKAGE_DIR = path.resolve(BASE_PATH, "packages");
-const ARCHIVES_DIR = path.resolve(BASE_PATH, ".archives");
+const PACKAGE_DIR = path.join(BASE_PATH, "packages");
+const ARCHIVES_DIR = path.join(BASE_PATH, ".archives");
 
 const mkdirp = util.promisify(mkdirpFn);
 
