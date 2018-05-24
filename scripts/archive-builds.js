@@ -1,18 +1,17 @@
-const { createArchive } = require("./_archive");
+const { createArchive, handleError } = require("./_archive");
 
 async function start() {
   console.log("Archiving builds...");
-  return createArchive(
+
+  const archivePath = await createArchive(
     [
-      "packages/react/lib/**/*",
-      "packages/vanilla/lib/**/*",
+      "packages/(react|vanilla)/lib/**/*",
       "packages/*/build/**/*"
     ],
     "builds.tar.gz"
   );
+
+  console.log(`Archive written to: ${archivePath}`);
 }
 
-start().catch(error => {
-  process.exit(1);
-  console.error(error);
-});
+start().catch(handleError);

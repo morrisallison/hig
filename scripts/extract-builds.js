@@ -1,12 +1,11 @@
-const { extractArchive } = require("./_archive");
+const { extractArchive, handleError } = require("./_archive");
 
 async function start() {
   console.log("Unpacking builds...");
 
-  return extractArchive("builds.tar.gz");
+  const archivePath = await extractArchive("builds.tar.gz");
+
+  console.log(`Archive extracted: ${archivePath}`);
 }
 
-start().catch(error => {
-  process.exit(1);
-  console.error(error);
-});
+start().catch(handleError);

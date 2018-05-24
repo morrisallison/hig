@@ -1,14 +1,18 @@
-const { createArchive } = require("./_archive");
+const { createArchive, handleError } = require("./_archive");
 
 async function start() {
   console.log("Archiving dependencies...");
-  return createArchive(
-    [".dependency-hash", "node_modules/**/*", "packages/*/node_modules/**/*"],
+
+  const archivePath = await createArchive(
+    [
+      ".dependency-hash",
+      "node_modules/!(@hig|hig-*)/**/*",
+      "packages/*/node_modules/!(@hig|hig-*)/**/*"
+    ],
     "dependencies.tar.gz"
   );
+
+  console.log(`Archive written to: ${archivePath}`);
 }
 
-start().catch(error => {
-  process.exit(1);
-  console.error(error);
-});
+start().catch(handleError);
