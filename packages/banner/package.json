@@ -29,6 +29,7 @@
     "@hig/eslint-config": "^0.1.0",
     "@hig/rich-text": "^0.1.1",
     "@hig/scripts": "^0.1.0",
+    "@hig/semantic-release-config": "^0.1.0",
     "@hig/styles": "^0.1.1"
   },
   "peerDependencies": {
@@ -36,10 +37,14 @@
   },
   "scripts": {
     "build": "hig-scripts-build",
-    "lint": "eslint src --color --ext .js,.jsx"
+    "lint": "hig-scripts-lint",
+    "release": "hig-scripts-release"
   },
   "eslintConfig": {
     "extends": "@hig"
+  },
+  "release": {
+    "extends": "@hig/semantic-release-config"
   },
   "babel": {
     "env": {
