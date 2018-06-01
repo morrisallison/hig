@@ -10,5 +10,10 @@ module.exports = {
   tagFormat: `${packageName}@\${version}`,
   dryRun: true,
   noCi: true,
-  debug: true
+  debug: true,
+  prepare: [
+    "@semantic-release/changelog",
+    "@semantic-release/npm",
+    "@semantic-release/git"
+  ]
 };
