@@ -17,6 +17,7 @@ import PropTypes from "prop-types";
  * @property {function(PresenterBag): any} [children]
  */
 
+
 /**
  * @typedef {Object} BannerContainerState
  * @property {boolean} isWrappingActions
