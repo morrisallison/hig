@@ -1,0 +1,23 @@
+{
+  "private": true,
+  "name": "@hig/semantic-release-config",
+  "version": "0.1.0",
+  "description": "Semantic Release configuration for HIG packages",
+  "main": "index.js",
+  "repository": "https://github.com/Autodesk/hig",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@semantic-release/exec": "^2.2.4",
+    "@semantic-release/github": "^4.1.0",
+    "@semantic-release/npm": "^3.2.0",
+    "execa": "^0.10.0",
+    "read-pkg": "^3.0.0",
+    "semantic-release-monorepo": "^6.0.1"
+  },
+  "devDependencies": {
+    "@hig/eslint-config": "0.1.0"
+  },
+  "eslintConfig": {
+    "extends": "@hig"
+  }
+}

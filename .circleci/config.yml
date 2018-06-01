@@ -181,12 +181,6 @@ jobs:
       - run:
           name: Deploy hig-react
           command: node ./scripts/publish-if-needed/index.js react
-      - run:
-          name: Deploy hig-interface
-          command: node ./scripts/publish-if-needed/index.js interface
-      - run:
-          name: Deploy hig-vanilla
-          command: node ./scripts/publish-if-needed/index.js vanilla
 workflows:
   version: 2
   build-test-validate-and-deploy:
