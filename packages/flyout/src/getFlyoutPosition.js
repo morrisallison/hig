@@ -1,4 +1,4 @@
-import { anchorPoints, availableAnchorPoints } from "./anchorPoints";
+import { anchorPoints } from "./anchorPoints";
 
 /**
  * @typedef {Object} GetFlyoutPositionPayload
@@ -6,6 +6,7 @@ import { anchorPoints, availableAnchorPoints } from "./anchorPoints";
  * @param {DOMRect} actionRect
  * @param {DOMRect} panelRect
  * @param {DOMRect} viewportRect
+ * @param {string[]} fallbackAnchorPoints
  */
 
 /**
@@ -15,7 +16,7 @@ import { anchorPoints, availableAnchorPoints } from "./anchorPoints";
  * @param {number} leftOffset
  */
 
-const CARET_SPACING = 7;
+const POINTER_SPACING = 7;
 const {
   TOP_LEFT,
   TOP_CENTER,
@@ -40,11 +41,11 @@ function calculateTopOffset({ anchorPoint, actionRect, panelRect }) {
     case TOP_LEFT:
     case TOP_CENTER:
     case TOP_RIGHT:
-      return actionRect.height + CARET_SPACING;
+      return actionRect.height + POINTER_SPACING;
     case BOTTOM_LEFT:
     case BOTTOM_CENTER:
     case BOTTOM_RIGHT:
-      return -1 * panelRect.height - CARET_SPACING;
+      return -1 * panelRect.height - POINTER_SPACING;
     case LEFT_TOP:
     case RIGHT_TOP:
       return 0;
@@ -68,11 +69,11 @@ function calculateLeftOffset({ anchorPoint, actionRect, panelRect }) {
     case LEFT_TOP:
     case LEFT_CENTER:
     case LEFT_BOTTOM:
-      return actionRect.width + CARET_SPACING;
+      return actionRect.width + POINTER_SPACING;
     case RIGHT_TOP:
     case RIGHT_CENTER:
     case RIGHT_BOTTOM:
-      return -1 * panelRect.width - CARET_SPACING;
+      return -1 * panelRect.width - POINTER_SPACING;
     case TOP_LEFT:
     case BOTTOM_LEFT:
       return 0;
@@ -127,7 +128,7 @@ function isInViewport(props) {
  * @returns {FlyoutPosition}
  */
 function getFallbackPosition(props) {
-  return availableAnchorPoints
+  return props.fallbackAnchorPoints
     .map(anchorPoint => calculatePosition({ ...props, anchorPoint }))
     .find(isInViewport(props));
 }

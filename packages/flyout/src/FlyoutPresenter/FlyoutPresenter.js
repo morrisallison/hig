@@ -38,8 +38,10 @@ export default function FlyoutPresenter(props) {
     anchorPoint,
     content,
     maxHeight,
-    topOffset,
-    leftOffset,
+    containerTopOffset,
+    containerLeftOffset,
+    pointerTopOffset,
+    pointerLeftOffset,
     refAction,
     refContainer,
     refPanel,
@@ -49,8 +51,15 @@ export default function FlyoutPresenter(props) {
     children
   } = props;
 
-  const containerStyle = { top: topOffset, left: leftOffset };
   const panelStyle = { maxHeight };
+  const containerStyle = {
+    top: containerTopOffset,
+    left: containerLeftOffset
+  };
+  const pointerStyle = {
+    top: pointerTopOffset,
+    left: pointerLeftOffset
+  };
   const wrapperClasses = cx([
     "hig__flyout-v1",
     transitionStateToModifier[transitionStatus],
@@ -67,7 +76,7 @@ export default function FlyoutPresenter(props) {
         style={containerStyle}
         ref={refContainer}
       >
-        <div className="hig__flyout-v1__chevron" />
+        <div className="hig__flyout-v1__chevron" style={pointerStyle} />
         <div
           className="hig__flyout-v1__panel"
           ref={refPanel}
@@ -94,9 +103,13 @@ FlyoutPresenter.propTypes = {
   /** Max height of the flyout content, in pixels */
   maxHeight: PropTypes.number,
   /** Top position of the container relative to the action */
-  topOffset: PropTypes.number,
+  containerTopOffset: PropTypes.number,
   /** Left position of the container relative to the action */
-  leftOffset: PropTypes.number,
+  containerLeftOffset: PropTypes.number,
+  /** Top position of the pointer relative to the container */
+  pointerTopOffset: PropTypes.number,
+  /** Left position of the pointer relative to the container */
+  pointerLeftOffset: PropTypes.number,
   /** Reference the action element */
   refAction: PropTypes.func,
   /** Reference the container element */

@@ -1,23 +1,53 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Icon, { names } from "@hig/icon";
-/** @todo Move flyout into its own package */
-import Flyout from "hig-react/lib/elements/components/Flyout";
+import Flyout, { anchorPoints } from "@hig/flyout";
 
 import "@hig/icon/build/index.css";
-import "hig-react/lib/hig-react.css";
+import "@hig/flyout/build/index.css";
 
-import Action from "./Action";
+import Action, { dividers, spacings, types } from "./Action";
+
+function getContainerPosition(position) {
+  const { anchorPoint, topOffset, leftOffset } = position;
+
+  if (!topOffset || !leftOffset) return position;
+
+  return {
+    anchorPoint,
+    topOffset: topOffset + 19,
+    leftOffset: leftOffset - 4
+  };
+}
+
+function getPointerPosition() {
+  return {
+    topOffset: -6,
+    leftOffset: -20
+  };
+}
 
 export default function HelpAction({ children }) {
   return (
-    <Action>
-      <Flyout anchorPoint="top-right" content={children}>
-        <button className="hig__top-nav__help-action">
+    <Flyout
+      content={children}
+      anchorPoint={anchorPoints.TOP_RIGHT}
+      containerPosition={getContainerPosition}
+      pointerPosition={getPointerPosition}
+      fallbackAnchorPoints={[]}
+    >
+      {({ handleClick }) => (
+        <Action
+          fitContent
+          type={types.ICON_BUTTON}
+          spacing={spacings.RIGHT}
+          divider={dividers.RIGHT}
+          onClick={handleClick}
+        >
           <Icon name={names.HELP} />
-        </button>
-      </Flyout>
-    </Action>
+        </Action>
+      )}
+    </Flyout>
   );
 }
 

@@ -66,75 +66,112 @@
 .hig__top-nav__interactions {
   display: flex;
   align-items: center;
+
+  // .hig__notifications .hig__global-nav__top-nav__shortcut {
+  //   padding: 0;
+  // }
 }
 
 .hig__top-nav__action {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
   height: 56px;
-  display: flex;
-  align-items: center;
-}
-
-.hig__top-nav__help-action {
-  display: flex;
-  width: 24px;
-  align-items: center;
-  flex-direction: column;
-  margin-right: 12px;
-  border: 0;
-  background: none;
-  outline: 0;
   cursor: pointer;
 
-  // This is required since the IconButton styles are too restrictive,
-  // and our Icons have predefined fills.
-  // TODO: Refactor IconButton styles, cleanup icons, and then remove this.
-  &:hover > .hig__icon > svg * {
-    fill: #0696d7;
+  &.hig__top-nav__action--fit-content {
+    width: auto;
+    height: auto;
   }
-}
 
-// This is required since the flyout wraps children in DIV elements
-// without any classes.
-// It's neccessary to break encapsulation here, due to the Flyout component
-// still being in Vanilla.
-// TODO: Migrate the Flyout component into its own package, and stop rendering useless DIVs.
-.hig__top-nav .hig__flyout__panel > div:not([class]) {
-  display: flex;
-  flex-direction: column;
-}
+  &.hig__top-nav__action--icon-button,
+  &.hig__top-nav__action--button {
+    padding: 0;
+    margin: 0;
+    border: 0;
+    background: none;
+    outline: 0;
 
-.hig__top-nav__profile-action {
-  padding: 0 0 0 12px;
-  margin: 12px 12px 12px 0;
-  border-width: 0 0 0 1px;
-  border-color: #ccc;
-  border-style: solid;
-  background: none;
-  outline: 0;
-  cursor: pointer;
+    // No button movement on Firefox
+    &:active {
+      padding: 0;
+    }
+  }
+
+  &.hig__top-nav__action--divider-left,
+  &.hig__top-nav__action--divider-right,
+  &.hig__top-nav__action--divider-both {
+    border-color: #ccc;
+    border-style: solid;
+  }
+
+  &.hig__top-nav__action--divider-left {
+    border-width: 0 0 0 1px;
+  }
+
+  &.hig__top-nav__action--divider-right {
+    border-width: 0 1px 0 0;
+  }
+
+  &.hig__top-nav__action--divider-both {
+    border-width: 0 1px 0 1px;
+  }
+
+  &.hig__top-nav__action--spacing-left {
+    padding: 0 0 0 12px;
+  }
+
+  &.hig__top-nav__action--spacing-right {
+    padding: 0 12px 0;
+  }
+
+  &.hig__top-nav__action--spacing-both {
+    padding: 0 12px;
+  }
+
+  &.hig__top-nav__action--icon-button {
+    // This is required since our Icons have predefined fills
+    // and the Icon doesn't allow for custom colors.
+    // TODO: Implement custom colors via theme in the Icon component.
+    &:hover > .hig__icon > svg * {
+      fill: #0696d7;
+    }
+
+    &.hig__top-nav__action--spacing-left {
+      padding: 0 0 0 6px;
+    }
+
+    &.hig__top-nav__action--spacing-right {
+      padding: 0 6px 0;
+    }
+
+    &.hig__top-nav__action--spacing-both {
+      padding: 0 6px;
+    }
+  }
 }
 
 .hig__top-nav__profile-flyout-content {
   @include reset;
 
   padding: 4px 14px;
+}
 
-  &__name {
-    font-weight: bold;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    font-size: 16px;
-    line-height: 24px;
-    color: #222934;
-  }
+.hig__top-nav__profile-flyout-content__name {
+  font-weight: bold;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  font-size: 16px;
+  line-height: 24px;
+  color: #222934;
+}
 
-  &__email {
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    color: #565c5f;
-    line-height: 16px;
-    font-size: 12px;
-  }
+.hig__top-nav__profile-flyout-content__email {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  color: #565c5f;
+  line-height: 16px;
+  font-size: 12px;
 }

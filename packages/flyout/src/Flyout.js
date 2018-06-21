@@ -24,11 +24,22 @@ class Flyout extends Component {
     /** Function called when the flyout panel is scrolled */
     onScroll: PropTypes.func,
     /** When provided, it overrides the flyout's open state */
-    open: PropTypes.bool
+    open: PropTypes.bool,
+    /** A function that returns the container's position */
+    containerPosition: PropTypes.func,
+    /** A function that returns the pointer's position */
+    pointerPosition: PropTypes.func,
+    /** A function that returns the pointer's position */
+    fallbackAnchorPoints: PropTypes.arrayOf(
+      PropTypes.oneOf(availableAnchorPoints)
+    )
   };
 
   static defaultProps = {
-    anchorPoint: anchorPoints.RIGHT_TOP
+    containerPosition: position => position,
+    pointerPosition: () => ({}),
+    anchorPoint: anchorPoints.RIGHT_TOP,
+    fallbackAnchorPoints: availableAnchorPoints
   };
 
   /**
@@ -58,6 +69,7 @@ class Flyout extends Component {
   }
 
   getPresenterPositionProps() {
+    const { fallbackAnchorPoints } = this.props;
     const { action, panel } = this;
 
     if (!action || !panel) return { top: 0, left: 0 };
@@ -71,7 +83,8 @@ class Flyout extends Component {
       anchorPoint,
       actionRect,
       panelRect,
-      viewportRect
+      viewportRect,
+      fallbackAnchorPoints
     });
   }
 
@@ -142,18 +155,27 @@ class Flyout extends Component {
   }
 
   createPresenterProps(transitionStatus) {
-    const { content, maxHeight, onScroll } = this.props;
+    const {
+      content,
+      maxHeight,
+      onScroll,
+      containerPosition,
+      pointerPosition
+    } = this.props;
     const { refContainer, refPanel, refAction, refWrapper } = this;
     const {
       anchorPoint,
-      topOffset,
-      leftOffset
-    } = this.getPresenterPositionProps();
+      topOffset: containerTopOffset,
+      leftOffset: containerLeftOffset
+    } = containerPosition(this.getPresenterPositionProps());
+    const { pointerTopOffset, pointerLeftOffset } = pointerPosition();
 
     return {
       anchorPoint,
-      topOffset,
-      leftOffset,
+      containerTopOffset,
+      containerLeftOffset,
+      pointerTopOffset,
+      pointerLeftOffset,
       content,
       maxHeight,
       refAction,

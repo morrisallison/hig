@@ -1,7 +1,7 @@
 import React from "react";
 import { storiesOf } from "@storybook/react";
 import HigNotifications from "hig-react/lib/elements/components/GlobalNav/TopNav/Notifications";
-import Notification from "hig-react/lib/elements/components/GlobalNav/TopNav/Notification";
+import { Notification } from "@hig/notifications-flyout";
 
 import TopNav from "../index";
 import accountLogo from "./accounts-logo.svg";

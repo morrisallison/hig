@@ -23,7 +23,7 @@
     "@hig/button": "^0.1.1",
     "@hig/checkbox": "^0.1.1-alpha",
     "@hig/dropdown": "^0.1.1-alpha",
-    "@hig/flyout": "^0.1.1-alpha",
+    "@hig/flyout": "^0.1.0",
     "@hig/icon": "^0.1.1",
     "@hig/icon-button": "^0.1.1",
     "@hig/icons": "^0.1.0",
