@@ -7,4 +7,5 @@ export const sizes = Object.freeze({
   XLARGE_64: "extralarge"
 });
 
+
 export const AVAILABLE_SIZES = Object.freeze(Object.values(sizes));
