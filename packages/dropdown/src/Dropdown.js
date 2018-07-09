@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Downshift from "downshift";
+import MultiDownshift from "@hig/multi-downshift";
+import { combineEventHandlers } from "@hig/utils";
 
-import composeEventHandlers from "./composeEventHandlers";
 import Input from "./presenters/Input";
 import Menu from "./presenters/Menu";
 import renderWrapper from "./presenters/Wrapper";
@@ -15,8 +16,10 @@ import renderOptions from "./presenters/renderOptions";
  * @param {OptionMeta} option
  * @returns {string}
  */
-function stringifyOption(option) {
-  return option ? option.label : "";
+function stringifyOption(value) {
+  if (!value) return "";
+
+  return value.label;
 }
 
 export default class Dropdown extends Component {
@@ -37,6 +40,10 @@ export default class Dropdown extends Component {
      * Placeholder text to render when an option has not been selected
      */
     placeholder: PropTypes.string,
+    /**
+     * Enables multiple selection
+     */
+    multiple: PropTypes.bool,
     /**
      * Prevents user actions on the field
      */
@@ -74,14 +81,14 @@ export default class Dropdown extends Component {
    *  Downshift provides all of it's helpers and state to `onChange`.
    *  We don't want to expose the entire Downshift API to consumers.
    *
-   * @param {selectedItem} OptionMeta
+   * @param {OptionMeta | OptionMeta[]} value
    * @param {DownshiftHelpers} downshift
    */
-  handleChange = selectedItem => {
+  handleChange = value => {
     const { onChange } = this.props;
 
     if (onChange) {
-      onChange(selectedItem);
+      onChange(value);
     }
   };
 
@@ -111,7 +118,7 @@ export default class Dropdown extends Component {
       disabled,
       required,
       onBlur,
-      onFocus: composeEventHandlers(toggleMenu, onFocus)
+      onFocus: combineEventHandlers(toggleMenu, onFocus)
     });
 
     return <Input {...inputProps} />;
@@ -166,10 +173,13 @@ export default class Dropdown extends Component {
   };
 
   render() {
+    const { multiple } = this.props;
+    const Behavior = multiple ? MultiDownshift : Downshift;
+
     return (
-      <Downshift onChange={this.handleChange} itemToString={stringifyOption}>
+      <Behavior onChange={this.handleChange} itemToString={stringifyOption}>
         {this.renderPresenter}
-      </Downshift>
+      </Behavior>
     );
   }
 }

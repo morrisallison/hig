@@ -18,8 +18,10 @@ export default function Input(props) {
   );
 }
 
-Input.propTypes = {
-  ...TextFieldPresenter.propTypes,
-  type: undefined,
-  readOnly: undefined
-};
+function createPropTypes() {
+  const { type, readOnly, ...otherPropTypes } = TextFieldPresenter.propTypes;
+
+  return otherPropTypes;
+}
+
+Input.propTypes = createPropTypes();

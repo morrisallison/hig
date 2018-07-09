@@ -21,7 +21,7 @@ exports[`Dropdown renders correctly 1`] = `
           />
           <label
             className="hig__text-field-v1__label"
-            htmlFor="downshift-0-input"
+            htmlFor="downshift-0"
           >
             HIG Themes
           </label>
@@ -35,7 +35,7 @@ exports[`Dropdown renders correctly 1`] = `
               autoComplete="off"
               className="hig__text-field-v1__input hig__text-field-v1__input--no-value"
               disabled={undefined}
-              id="downshift-0-input"
+              id="downshift-0"
               onBlur={[Function]}
               onChange={[Function]}
               onFocus={[Function]}
