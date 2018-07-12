@@ -4400,6 +4400,12 @@ downshift@^1.31.15:
   version "1.31.15"
   resolved "https://registry.yarnpkg.com/downshift/-/downshift-1.31.15.tgz#ac31c601e2e9e34c5bb85b969c11ba87248f5e67"
 
+downshift@^2.0.10:
+  version "2.0.10"
+  resolved "https://registry.yarnpkg.com/downshift/-/downshift-2.0.10.tgz#598b93c5598c4c45caf8c46479fdfde587da7860"
+  dependencies:
+    prop-types "^15.6.0"
+
 du@0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/du/-/du-0.1.0.tgz#f26e340a09c7bc5b6fd69af6dbadea60fa8c6f4d"
