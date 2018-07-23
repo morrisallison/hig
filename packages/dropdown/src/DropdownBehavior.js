@@ -1,8 +1,12 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import Downshift from "downshift";
+import MultiDownshift from "@hig/multi-downshift";
 
-import DropdownPresenter from "./presenters/DropdownPresenter";
-import DropdownBehavior from "./DropdownBehavior";
+import InputPresenter from "./presenters/InputPresenter";
+import MenuPresenter from "./presenters/MenuPresenter";
+import renderWrapper from "./presenters/WrapperPresenter";
+import renderOptions from "./presenters/renderOptions";
 
 /** @typedef {import("./presenters/renderOptions").OptionMeta} OptionMeta */
 /** @typedef {import("downshift").ControllerStateAndHelpers} DownshiftHelpers */
@@ -108,29 +112,95 @@ export default class Dropdown extends Component {
    * @param {DownshiftHelpers} downshift
    * @returns {JSX.Element}
    */
-  renderPresenter = behaviorProps => {
-    const presenterProps = {
-      ...this.props,
-      ...behaviorProps
-    };
+  renderInput(downshift) {
+    const { id, toggleMenu, getInputProps } = downshift;
+
+    const {
+      label,
+      instructions,
+      placeholder,
+      disabled,
+      required,
+      onBlur,
+      onFocus
+    } = this.props;
+
+    const inputProps = getInputProps({
+      id,
+      label,
+      instructions,
+      placeholder,
+      disabled,
+      required,
+      onBlur,
+      onFocus,
+      onClick: toggleMenu
+    });
+
+    return <InputPresenter key="input" {...inputProps} />;
+  }
+
+  /**
+   * @param {DownshiftHelpers} downshift
+   * @returns {JSX.Element}
+   */
+  renderMenu(downshift) {
+    const {
+      isOpen,
+      getItemProps,
+      getMenuProps,
+      highlightedIndex,
+      selectedItem,
+      selectedItems
+    } = downshift;
+    const menuProps = getMenuProps({ isOpen });
+    const { multiple, options, formatOption } = this.props;
+    const children = renderOptions({
+      multiple,
+      options,
+      formatOption,
+      getItemProps,
+      highlightedIndex,
+      selectedItem,
+      selectedItems
+    });
+
+    return (
+      <MenuPresenter key="menu" {...menuProps}>
+        {children}
+      </MenuPresenter>
+    );
+  }
+
+  /**
+   * @param {DownshiftHelpers} downshift
+   * @returns {JSX.Element}
+   */
+  renderPresenter = downshift => {
+    const { disabled } = this.props;
 
     /**
      * The `Wrapper` presenter is used as a function to avoid having to use Downshift's `getRootProps`
      * @see https://github.com/paypal/downshift#getrootprops
      */
-    return <DropdownPresenter {...presenterProps} />;
+    return renderWrapper({
+      disabled,
+      children: [this.renderInput(downshift), this.renderMenu(downshift)]
+    });
   };
 
   render() {
     const { id, multiple, formatOption } = this.props;
-    const props = {
-      id,
-      multiple,
-      formatOption
-    };
+    const Behavior = multiple ? MultiDownshift : Downshift;
 
     return (
-      <DropdownBehavior {...props}>{this.renderPresenter}</DropdownBehavior>
+      <Behavior
+        id={id}
+        onChange={this.handleChange}
+        itemToString={formatOption}
+      >
+        {this.renderPresenter}
+      </Behavior>
     );
   }
 }

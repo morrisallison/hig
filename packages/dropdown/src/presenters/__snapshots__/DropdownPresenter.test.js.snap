@@ -1,0 +1,324 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DropdownPresenter renders non-undefined values as options 1`] = `
+<div
+  className="hig__dropdown"
+>
+  <div
+    className="hig__dropdown__input-wrapper"
+  >
+    <div
+      className="hig__text-field-v1 hig__text-field-v1--button"
+    >
+      <div
+        className="hig__text-field-v1__content"
+      >
+        <div
+          className="hig__text-field-v1__input-wrapper"
+        >
+          <div
+            className="hig__text-field-v1__input-row"
+          >
+            <input
+              className="hig__text-field-v1__input hig__text-field-v1__input--no-value"
+              id="text-field-65308"
+              onBlur={[Function]}
+              onFocus={[Function]}
+              readOnly={true}
+              type="button"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <span
+      className="hig__dropdown__input-caret"
+    >
+      <div
+        className="hig__icon hig__icon--24-size"
+        dangerouslySetInnerHTML={
+          Object {
+            "__html": "<svg width=\\"10\\" height=\\"6\\" viewBox=\\"0 0 10 6\\" xmlns=\\"http://www.w3.org/2000/svg\\" role=\\"img\\" title=\\"caret-24\\"><polyline transform=\\"rotate(45 9.828 3)\\" points=\\"8 2 8 8 2 8\\" stroke=\\"#2E4258\\" stroke-width=\\"1.15\\" fill=\\"none\\" fill-rule=\\"evenodd\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\"/></svg>",
+          }
+        }
+      />
+    </span>
+  </div>
+  <div
+    className="hig__dropdown-v1__menu"
+  >
+    <div
+      className="hig__dropdown-option"
+      index={0}
+      item="foo"
+    >
+      <span
+        className="hig__dropdown-option__label"
+      >
+        foo
+      </span>
+    </div>
+    <div
+      className="hig__dropdown-option"
+      index={1}
+      item={1}
+    >
+      <span
+        className="hig__dropdown-option__label"
+      >
+        1
+      </span>
+    </div>
+    <div
+      className="hig__dropdown-option"
+      index={2}
+      item={true}
+    >
+      <span
+        className="hig__dropdown-option__label"
+      >
+        true
+      </span>
+    </div>
+    <div
+      className="hig__dropdown-option"
+      index={3}
+      item={false}
+    >
+      <span
+        className="hig__dropdown-option__label"
+      >
+        false
+      </span>
+    </div>
+    <div
+      className="hig__dropdown-option"
+      index={4}
+      item={null}
+    >
+      <span
+        className="hig__dropdown-option__label"
+      >
+        null
+      </span>
+    </div>
+    <div
+      className="hig__dropdown-option"
+      index={5}
+      item={Array []}
+    >
+      <span
+        className="hig__dropdown-option__label"
+      >
+        
+      </span>
+    </div>
+    <div
+      className="hig__dropdown-option"
+      index={6}
+      item={Object {}}
+    >
+      <span
+        className="hig__dropdown-option__label"
+      >
+        [object Object]
+      </span>
+    </div>
+    <div
+      className="hig__dropdown-option"
+      index={7}
+      item={Map {}}
+    >
+      <span
+        className="hig__dropdown-option__label"
+      >
+        [object Map]
+      </span>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`DropdownPresenter renders with a label and an ID 1`] = `
+<div
+  className="hig__dropdown"
+>
+  <div
+    className="hig__dropdown__input-wrapper"
+  >
+    <div
+      className="hig__text-field-v1 hig__text-field-v1--button"
+    >
+      <div
+        className="hig__text-field-v1__content"
+      >
+        <div
+          className="hig__text-field-v1__input-wrapper"
+        >
+          <div
+            className="hig__text-field-v1__input-row"
+          >
+            <input
+              className="hig__text-field-v1__input hig__text-field-v1__input--no-value"
+              id="text-field-65308"
+              onBlur={[Function]}
+              onFocus={[Function]}
+              readOnly={true}
+              type="button"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <span
+      className="hig__dropdown__input-caret"
+    >
+      <div
+        className="hig__icon hig__icon--24-size"
+        dangerouslySetInnerHTML={
+          Object {
+            "__html": "<svg width=\\"10\\" height=\\"6\\" viewBox=\\"0 0 10 6\\" xmlns=\\"http://www.w3.org/2000/svg\\" role=\\"img\\" title=\\"caret-24\\"><polyline transform=\\"rotate(45 9.828 3)\\" points=\\"8 2 8 8 2 8\\" stroke=\\"#2E4258\\" stroke-width=\\"1.15\\" fill=\\"none\\" fill-rule=\\"evenodd\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\"/></svg>",
+          }
+        }
+      />
+    </span>
+  </div>
+  <div
+    className="hig__dropdown-v1__menu"
+  />
+</div>
+`;
+
+exports[`DropdownPresenter renders with custom option formatting 1`] = `
+<div
+  className="hig__dropdown"
+>
+  <div
+    className="hig__dropdown__input-wrapper"
+  >
+    <div
+      className="hig__text-field-v1 hig__text-field-v1--button"
+    >
+      <div
+        className="hig__text-field-v1__content"
+      >
+        <div
+          className="hig__text-field-v1__input-wrapper"
+        >
+          <div
+            className="hig__text-field-v1__input-row"
+          >
+            <input
+              className="hig__text-field-v1__input hig__text-field-v1__input--no-value"
+              id="text-field-65308"
+              onBlur={[Function]}
+              onFocus={[Function]}
+              readOnly={true}
+              type="button"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <span
+      className="hig__dropdown__input-caret"
+    >
+      <div
+        className="hig__icon hig__icon--24-size"
+        dangerouslySetInnerHTML={
+          Object {
+            "__html": "<svg width=\\"10\\" height=\\"6\\" viewBox=\\"0 0 10 6\\" xmlns=\\"http://www.w3.org/2000/svg\\" role=\\"img\\" title=\\"caret-24\\"><polyline transform=\\"rotate(45 9.828 3)\\" points=\\"8 2 8 8 2 8\\" stroke=\\"#2E4258\\" stroke-width=\\"1.15\\" fill=\\"none\\" fill-rule=\\"evenodd\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\"/></svg>",
+          }
+        }
+      />
+    </span>
+  </div>
+  <div
+    className="hig__dropdown-v1__menu"
+  >
+    <div
+      className="hig__dropdown-option"
+      index={0}
+      item="bar"
+    >
+      <span
+        className="hig__dropdown-option__label"
+      >
+        Bar
+      </span>
+    </div>
+    <div
+      className="hig__dropdown-option"
+      index={1}
+      item="baz"
+    >
+      <span
+        className="hig__dropdown-option__label"
+      >
+        Baz
+      </span>
+    </div>
+    <div
+      className="hig__dropdown-option"
+      index={2}
+      item="foo"
+    >
+      <span
+        className="hig__dropdown-option__label"
+      >
+        Foo
+      </span>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`DropdownPresenter renders without props 1`] = `
+<div
+  className="hig__dropdown"
+>
+  <div
+    className="hig__dropdown__input-wrapper"
+  >
+    <div
+      className="hig__text-field-v1 hig__text-field-v1--button"
+    >
+      <div
+        className="hig__text-field-v1__content"
+      >
+        <div
+          className="hig__text-field-v1__input-wrapper"
+        >
+          <div
+            className="hig__text-field-v1__input-row"
+          >
+            <input
+              className="hig__text-field-v1__input hig__text-field-v1__input--no-value"
+              id="text-field-65308"
+              onBlur={[Function]}
+              onFocus={[Function]}
+              readOnly={true}
+              type="button"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <span
+      className="hig__dropdown__input-caret"
+    >
+      <div
+        className="hig__icon hig__icon--24-size"
+        dangerouslySetInnerHTML={
+          Object {
+            "__html": "<svg width=\\"10\\" height=\\"6\\" viewBox=\\"0 0 10 6\\" xmlns=\\"http://www.w3.org/2000/svg\\" role=\\"img\\" title=\\"caret-24\\"><polyline transform=\\"rotate(45 9.828 3)\\" points=\\"8 2 8 8 2 8\\" stroke=\\"#2E4258\\" stroke-width=\\"1.15\\" fill=\\"none\\" fill-rule=\\"evenodd\\" stroke-linecap=\\"round\\" stroke-linejoin=\\"round\\"/></svg>",
+          }
+        }
+      />
+    </span>
+  </div>
+  <div
+    className="hig__dropdown-v1__menu"
+  />
+</div>
+`;

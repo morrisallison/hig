@@ -4,6 +4,18 @@ import cx from "classnames";
 
 import "./MenuPresenter.scss";
 
+function MenuPresenter({ isOpen, children, ...otherProps }) {
+  const classes = cx("hig__dropdown-v1__menu", {
+    "hig__dropdown-v1__menu--open": isOpen
+  });
+
+  return (
+    <div className={classes} {...otherProps}>
+      {children}
+    </div>
+  );
+}
+
 export default function MenuPresenter({ isOpen, children, ...otherProps }) {
   const classes = cx("hig__dropdown-v1__menu", {
     "hig__dropdown-v1__menu--open": isOpen
