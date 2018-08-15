@@ -9,6 +9,18 @@ describe("notifications-flyout/index", () => {
     {
       name: "Notification",
       value: expect.any(Function)
+    },
+    {
+      name: "Notifications",
+      value: expect.any(Function)
+    },
+    {
+      name: "types",
+      value: expect.any(Object)
+    },
+    {
+      name: "AVAILABLE_TYPES",
+      value: expect.any(Array)
     }
   ].forEach(({ name, value }) => {
     it(`exports ${name}`, () => {

@@ -6,31 +6,22 @@ Read more about when and how to use the Notifications Flyout [on the internal wi
 
 ## Getting started
 
-```
+```bash
 yarn add @hig/notifications-flyout
 ```
 
 ## Import the component and CSS
 
-```
-import { NotificationsFlyout, Notification } from '@hig/notifications-flyout';
+```js
+import NotificationsFlyout, { Notification } from '@hig/notifications-flyout';
 import '@hig/notifications-flyout/build/index.css';
 ```
 
 ## Basic usage
 
 ```jsx
-<NotificationsFlyout
-  title="Notifications"
-  unreadCount={3}
-  featuredNotification={(
-    <Notification>
-      <p>New improvements to lorem ipsum</p>
-    </Notification>
-  )}
-  open
->
-  <Notification type="primary" unread>
+<NotificationsFlyout>
+  <Notification>
     <p>Your subscription expires May 5</p>
   </Notification>
 </NotificationsFlyout>

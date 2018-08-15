@@ -1,0 +1,63 @@
+import React from "react";
+import PropTypes from "prop-types";
+import { Panel } from "@hig/flyout";
+import cx from "classnames";
+import { ENTERED, ENTERING } from "react-transition-group/Transition";
+import ProgressRing from "@hig/progress-ring";
+import "@hig/progress-ring/build/index.css";
+
+import "./PanelPresenter.scss";
+
+const loadingModifiersByTransitionState = {
+  [ENTERED]: "hig__notifications-flyout__panel__loading--open",
+  [ENTERING]: "hig__notifications-flyout__panel__loading--open"
+};
+
+export default function PanelPresenter({
+  children,
+  heading,
+  innerRef,
+  listMaxHeight,
+  loadingTransitionState,
+  onScroll,
+  refListWrapper
+}) {
+  const loadingClasses = cx(
+    "hig__notifications-flyout__panel__loading",
+    loadingModifiersByTransitionState[loadingTransitionState]
+  );
+
+  return (
+    <Panel innerRef={innerRef}>
+      <header className="hig__notifications-flyout__panel__title">
+        {heading}
+      </header>
+      <section
+        className="hig__notifications-flyout__panel__container"
+        ref={refListWrapper}
+        style={{ maxHeight: listMaxHeight }}
+      >
+        <div role="list" onScroll={onScroll}>
+          {children}
+        </div>
+      </section>
+      <footer className={loadingClasses}>
+        <ProgressRing size="s" />
+      </footer>
+    </Panel>
+  );
+}
+
+PanelPresenter.defaultProps = {
+  heading: "Notifications"
+};
+
+PanelPresenter.propTypes = {
+  children: PropTypes.node,
+  heading: PropTypes.node,
+  innerRef: PropTypes.func,
+  listMaxHeight: PropTypes.string,
+  loadingTransitionState: PropTypes.string,
+  onScroll: PropTypes.func,
+  refListWrapper: PropTypes.func
+};
