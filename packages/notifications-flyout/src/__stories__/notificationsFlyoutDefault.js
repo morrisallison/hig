@@ -4,7 +4,7 @@ import { boolean, text } from "@storybook/addon-knobs/react";
 import { anchorPoints } from "@hig/flyout";
 import { controlledBool, controlledNumber } from "@hig/storybook/utils";
 
-import createSampleNotifications from "./createSampleNotifications";
+import createSampleNotifications from "../__fixtures__/createSampleNotifications";
 import NotificationsFlyout from "../NotificationsFlyout";
 import NotificationsFlyoutLayout from "./NotificationsFlyoutLayout";
 

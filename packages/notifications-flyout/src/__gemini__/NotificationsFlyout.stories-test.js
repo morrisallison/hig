@@ -2,7 +2,7 @@ import React from "react";
 import { storiesOf } from "@storybook/react";
 import { anchorPoints } from "@hig/flyout";
 
-import createSampleNotifications from "../__stories__/createSampleNotifications";
+import createSampleNotifications from "../__fixtures__/createSampleNotifications";
 import NotificationsFlyout from "../NotificationsFlyout";
 
 const captureStyle = {

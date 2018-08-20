@@ -6,7 +6,7 @@ import TextLink from "@hig/text-link";
 import "@hig/button/build/index.css";
 import "@hig/text-link/build/index.css";
 
-import createSampleNotifications from "./createSampleNotifications";
+import createSampleNotifications from "../__fixtures__/createSampleNotifications";
 import NotificationsFlyout from "../NotificationsFlyout";
 import NotificationsFlyoutLayout from "./NotificationsFlyoutLayout";
 

@@ -2,16 +2,11 @@ import React from "react";
 import TextLink from "@hig/text-link";
 import Timestamp from "@hig/timestamp";
 
-export default function createSampleNotifications() {
-  const minutesDate1 = new Date();
-  const minutesDate2 = new Date();
-  const minutesDate3 = new Date();
-  const minutesDate4 = new Date();
-
-  const updatedDate1 = minutesDate1.setMinutes(minutesDate1.getMinutes() - 3);
-  const updatedDate2 = minutesDate2.setHours(minutesDate2.getHours() - 2);
-  const updatedDate3 = minutesDate2.setHours(minutesDate3.getHours() - 24);
-  const updatedDate4 = minutesDate4.setMinutes(minutesDate4.getMinutes() - 20);
+export default function createSampleNotifications({ baseDate = new Date() }) {
+  const updatedDate1 = baseDate.setMinutes(baseDate.getMinutes() - 3);
+  const updatedDate2 = baseDate.setHours(baseDate.getHours() - 2);
+  const updatedDate3 = baseDate.setHours(baseDate.getHours() - 24);
+  const updatedDate4 = baseDate.setMinutes(baseDate.getMinutes() - 20);
 
   return [
     {
