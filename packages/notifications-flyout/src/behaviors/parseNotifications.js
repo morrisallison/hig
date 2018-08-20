@@ -1,4 +1,5 @@
 import { Children } from "react";
+import Notification from "../Notification";
 import NotificationsFacade from "../facades/NotificationsFacade";
 
 /** @typedef {import("./facades/NotificationsFacade").Element} NotificationsElement */
@@ -18,6 +19,7 @@ import NotificationsFacade from "../facades/NotificationsFacade";
  */
 
 /**
+ * Converts the given notifications input into an array
  * @param {Input} input
  * @returns {Object[]}
  */
@@ -32,13 +34,18 @@ function normalizeInput(input) {
 
   const element = Children.only(input);
 
-  if (element.type !== NotificationsFacade) {
-    throw new Error(
-      "Notifications must be provided as either an array or within <Notifications />."
-    );
+  if (element.type === Notification) {
+    return [element];
   }
 
-  return Children.toArray(element.props.children);
+  if (element.type === NotificationsFacade) {
+    return Children.toArray(element.props.children);
+  }
+
+  throw new Error(
+    /* eslint-disable-next-line max-len */
+    "Notifications must be provided as either an array, children, or as children of a <Notifications /> component."
+  );
 }
 
 /**

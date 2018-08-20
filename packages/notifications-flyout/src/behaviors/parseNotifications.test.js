@@ -55,17 +55,10 @@ describe("notification-flyout/behaviors/parseNotifications", () => {
       ]
     },
     {
-      desc: "returns notifications when given React children",
-      input: (
-        <div>
-          <Notification id="1" featured />
-          <Notification id="2">Hello World</Notification>
-        </div>
-      ).props.children,
-      expected: [
-        { id: "1", featured: true },
-        { id: "2", content: "Hello World" }
-      ]
+      desc:
+        "returns notifications when given a single <Notification /> component as children",
+      input: <Notification id="1" featured />,
+      expected: [{ id: "1", featured: true }]
     }
   ].forEach(({ desc, input, expected }) => {
     it(desc, () => {
