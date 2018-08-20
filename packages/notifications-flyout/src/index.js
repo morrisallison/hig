@@ -1,6 +1,12 @@
 import "@hig/styles/build/fonts.css";
 
-export { default } from "./NotificationsFlyout";
-export { default as Notification } from "./Notification";
-export { default as Notifications } from "./facades/NotificationsFacade";
+import NotificationsFlyout from "./NotificationsFlyout";
+import Notification from "./Notification";
+import Notifications from "./facades/NotificationsFacade";
+
+NotificationsFlyout.Notification = Notification;
+NotificationsFlyout.Notifications = Notifications;
+
+export { NotificationsFlyout as default, Notification, Notifications };
 export { types, AVAILABLE_TYPES } from "./types";
+export { anchorPoints, AVAILABLE_ANCHOR_POINTS } from "@hig/flyout";

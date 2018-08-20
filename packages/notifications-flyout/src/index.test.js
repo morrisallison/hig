@@ -7,6 +7,14 @@ describe("notifications-flyout/index", () => {
       value: expect.any(Function)
     },
     {
+      name: "default.Notification",
+      value: expect.any(Function)
+    },
+    {
+      name: "default.Notifications",
+      value: expect.any(Function)
+    },
+    {
       name: "Notification",
       value: expect.any(Function)
     },
@@ -20,6 +28,14 @@ describe("notifications-flyout/index", () => {
     },
     {
       name: "AVAILABLE_TYPES",
+      value: expect.any(Array)
+    },
+    {
+      name: "anchorPoints",
+      value: expect.any(Object)
+    },
+    {
+      name: "AVAILABLE_ANCHOR_POINTS",
       value: expect.any(Array)
     }
   ].forEach(({ name, value }) => {
