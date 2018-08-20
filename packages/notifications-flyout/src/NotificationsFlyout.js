@@ -11,6 +11,7 @@ import Notification from "./Notification";
 import Panel from "./Panel";
 
 function createNotificationRenderer({ hideFlyout, dismissNotification }) {
+  /* eslint-disable-next-line react/prop-types */
   return function renderNotification({ id, key, content, ...otherProps }) {
     return (
       <Notification
@@ -32,6 +33,7 @@ function createPanelRenderer({
   loading,
   heading
 }) {
+  /* eslint-disable-next-line react/prop-types */
   return function renderPanel({ hideFlyout, handleScroll, innerRef }) {
     return (
       <Panel

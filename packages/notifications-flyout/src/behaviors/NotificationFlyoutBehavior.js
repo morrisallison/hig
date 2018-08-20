@@ -27,9 +27,9 @@ import parseNotifications from "./parseNotifications";
 
 /**
  * @typedef {Object} State
- * @property {string[]} dismissedNotifications An array of IDs of notifications that have been dismissed
+ * @property {string[]} dismissedNotifications An array of notification IDs that have been dismissed
  * @property {ParsedNotification[]} notifications
- * @property {string[]} readNotifications An array of IDs of notifications that have been read
+ * @property {string[]} readNotifications An array of notification IDs that have been read
  */
 
 class NotificationFlyoutBehavior extends Component {

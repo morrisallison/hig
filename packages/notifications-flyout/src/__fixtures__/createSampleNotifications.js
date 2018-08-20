@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React from "react";
 import TextLink from "@hig/text-link";
 import Timestamp from "@hig/timestamp";
