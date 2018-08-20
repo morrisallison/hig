@@ -35,7 +35,7 @@ import parseNotifications from "./parseNotifications";
 class NotificationFlyoutBehavior extends Component {
   static propTypes = {
     /** Render prop */
-    children: PropTypes.func,
+    children: PropTypes.func.isRequired,
     /** Rendered notifications */
     notifications: PropTypes.oneOfType([
       PropTypes.node,

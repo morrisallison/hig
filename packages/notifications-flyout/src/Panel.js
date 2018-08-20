@@ -28,7 +28,7 @@ export default function Panel(props) {
 Panel.propTypes = {
   children: PropTypes.node,
   heading: PropTypes.string,
-  innerRef: PropTypes.func,
+  innerRef: PropTypes.func.isRequired,
   loading: PropTypes.bool,
   onScroll: PropTypes.func
 };

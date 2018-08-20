@@ -2,8 +2,14 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Panel } from "@hig/flyout";
 import cx from "classnames";
-import { ENTERED, ENTERING } from "react-transition-group/Transition";
 import ProgressRing from "@hig/progress-ring";
+import {
+  UNMOUNTED,
+  EXITED,
+  ENTERING,
+  ENTERED,
+  EXITING
+} from "react-transition-group/Transition";
 import "@hig/progress-ring/build/index.css";
 
 import "./PanelPresenter.scss";
@@ -55,9 +61,15 @@ PanelPresenter.defaultProps = {
 PanelPresenter.propTypes = {
   children: PropTypes.node,
   heading: PropTypes.node,
-  innerRef: PropTypes.func,
+  innerRef: PropTypes.func.isRequired,
   listMaxHeight: PropTypes.string,
-  loadingTransitionState: PropTypes.string,
+  loadingTransitionState: PropTypes.oneOf([
+    UNMOUNTED,
+    EXITED,
+    ENTERING,
+    ENTERED,
+    EXITING
+  ]),
   onScroll: PropTypes.func,
   refListWrapper: PropTypes.func
 };

@@ -12,10 +12,10 @@ const TRANSITION_DURATION = 300;
 
 export default class NotificationBehavior extends Component {
   static propTypes = {
-    /** A callback called when user dismisses a featured notification */
-    onDismiss: PropTypes.func,
     /** Notification content */
-    children: PropTypes.func
+    children: PropTypes.func.isRequired,
+    /** A callback called when user dismisses a featured notification */
+    onDismiss: PropTypes.func
   };
 
   /**
