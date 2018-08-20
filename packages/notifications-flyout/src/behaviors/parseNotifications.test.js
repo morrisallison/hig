@@ -5,7 +5,7 @@ import Notification from "../Notification";
 import Notifications from "../facades/NotificationsFacade";
 import { types } from "../types";
 
-describe("notification-flyout/parseNotifications", () => {
+describe("notification-flyout/behaviors/parseNotifications", () => {
   function handleDismiss() {}
 
   [

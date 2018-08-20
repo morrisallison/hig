@@ -2,9 +2,15 @@ import React from "react";
 import PropTypes from "prop-types";
 import cx from "classnames";
 import RichText from "@hig/rich-text";
-import * as transition from "react-transition-group/Transition";
+import {
+  UNMOUNTED,
+  EXITED,
+  ENTERING,
+  ENTERED,
+  EXITING
+} from "react-transition-group/Transition";
 
-import { types } from "../types";
+import { types, AVAILABLE_TYPES } from "../types";
 import DismissButtonPresenter from "./DismissButtonPresenter";
 import "./NotificationPresenter.scss";
 
@@ -16,8 +22,8 @@ const modifiersByType = {
 };
 
 const modifiersByTransitionStatus = {
-  [transition.EXITED]: "hig__notification-v1--exited",
-  [transition.EXITING]: "hig__notification-v1--exiting"
+  [EXITED]: "hig__notification-v1--exited",
+  [EXITING]: "hig__notification-v1--exiting"
 };
 
 export default function NotificationPresenter(props) {
@@ -79,7 +85,13 @@ NotificationPresenter.propTypes = {
   onDismissButtonClick: PropTypes.func,
   showDismissButton: PropTypes.bool,
   timestamp: PropTypes.node,
-  transitionStatus: PropTypes.string,
-  type: PropTypes.string,
+  transitionStatus: PropTypes.oneOf([
+    UNMOUNTED,
+    EXITED,
+    ENTERING,
+    ENTERED,
+    EXITING
+  ]),
+  type: PropTypes.oneOf(AVAILABLE_TYPES),
   unread: PropTypes.bool
 };

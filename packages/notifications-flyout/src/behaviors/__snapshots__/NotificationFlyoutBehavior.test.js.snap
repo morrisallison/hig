@@ -1,0 +1,335 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`notification-flyout/behaviors/NotificationFlyoutBehavior render prop payload normalizes notifications 1`] = `
+Array [
+  Object {
+    "content": <div>
+      <p>
+        <b>
+          Your subscription expires May 5
+        </b>
+      </p>
+      <p>
+        Maya
+        <br />
+        Media & Entertainment Collection
+        <br />
+        Product Design Collection
+        <br />
+        2 more
+      </p>
+      <p>
+        <TextLink
+          link="https://github.com/Autodesk/hig"
+          onClick={[Function]}
+          type="primary"
+        >
+          Manage renewal
+        </TextLink>
+      </p>
+    </div>,
+    "featured": true,
+    "id": "featured",
+    "key": "notification-0",
+    "timestamp": <Timestamp
+      timestamp="2018-08-18T14:09:55.441Z"
+    />,
+    "unread": true,
+  },
+  Object {
+    "content": <div>
+      <p>
+        <b>
+          Your subscription expires May 5
+        </b>
+      </p>
+      <p>
+        Maya
+        <br />
+        Media & Entertainment Collection
+        <br />
+        Product Design Collection
+        <br />
+        2 more
+      </p>
+      <p>
+        <TextLink
+          link="https://github.com/Autodesk/hig"
+          onClick={[Function]}
+          type="primary"
+        >
+          Manage renewal
+        </TextLink>
+      </p>
+    </div>,
+    "id": "0",
+    "key": "notification-1",
+    "timestamp": <Timestamp
+      timestamp="2018-08-18T14:09:55.441Z"
+    />,
+    "type": "primary",
+    "unread": true,
+  },
+  Object {
+    "content": <div>
+      <p>
+        <b>
+          Your subscription expires April 20
+        </b>
+      </p>
+      <p>
+        AutoCAD
+        <br />
+        Architecture Construction Engineering Collection
+        <br />
+        Product Design Collection
+        <br />
+      </p>
+      <p>
+        <TextLink
+          link="https://github.com/Autodesk/hig"
+          onClick={[Function]}
+          type="primary"
+        >
+          Manage renewal
+        </TextLink>
+      </p>
+    </div>,
+    "id": "1",
+    "key": "notification-2",
+    "timestamp": <Timestamp
+      timestamp="2018-08-18T12:09:55.441Z"
+    />,
+    "type": "success",
+    "unread": true,
+  },
+  Object {
+    "content": <div>
+      <p>
+        <b>
+          Your subscription expires June 15
+        </b>
+      </p>
+      <p>
+        AutoCAD
+        <br />
+        Architecture Construction Engineering Collection
+        <br />
+        HIG
+        <br />
+      </p>
+      <p>
+        <TextLink
+          link="https://github.com/Autodesk/hig"
+          onClick={[Function]}
+          type="primary"
+        >
+          Manage Renewal
+        </TextLink>
+      </p>
+    </div>,
+    "id": "3",
+    "key": "notification-3",
+    "timestamp": <Timestamp
+      timestamp="2018-08-17T12:09:55.441Z"
+    />,
+    "type": "error",
+    "unread": true,
+  },
+  Object {
+    "content": <div>
+      <p>
+        <b>
+          Your subscription expires June 15
+        </b>
+      </p>
+      <p>
+        A new version of Autodesk Revit is available for download.
+      </p>
+      <p>
+        <TextLink
+          link="https://github.com/Autodesk/hig"
+          onClick={[Function]}
+          type="primary"
+        >
+          Manage renewal
+        </TextLink>
+      </p>
+    </div>,
+    "id": "4",
+    "key": "notification-4",
+    "timestamp": <Timestamp
+      timestamp="2018-08-17T11:49:55.441Z"
+    />,
+    "type": "warning",
+    "unread": true,
+  },
+]
+`;
+
+exports[`notification-flyout/behaviors/NotificationFlyoutBehavior render prop payload provides a payload to the \`children\` render prop 1`] = `
+Array [
+  Object {
+    "content": <div>
+      <p>
+        <b>
+          Your subscription expires May 5
+        </b>
+      </p>
+      <p>
+        Maya
+        <br />
+        Media & Entertainment Collection
+        <br />
+        Product Design Collection
+        <br />
+        2 more
+      </p>
+      <p>
+        <TextLink
+          link="https://github.com/Autodesk/hig"
+          onClick={[Function]}
+          type="primary"
+        >
+          Manage renewal
+        </TextLink>
+      </p>
+    </div>,
+    "featured": true,
+    "id": "featured",
+    "key": "notification-0",
+    "timestamp": <Timestamp
+      timestamp="2018-08-19T16:32:55.441Z"
+    />,
+    "unread": true,
+  },
+  Object {
+    "content": <div>
+      <p>
+        <b>
+          Your subscription expires May 5
+        </b>
+      </p>
+      <p>
+        Maya
+        <br />
+        Media & Entertainment Collection
+        <br />
+        Product Design Collection
+        <br />
+        2 more
+      </p>
+      <p>
+        <TextLink
+          link="https://github.com/Autodesk/hig"
+          onClick={[Function]}
+          type="primary"
+        >
+          Manage renewal
+        </TextLink>
+      </p>
+    </div>,
+    "id": "0",
+    "key": "notification-1",
+    "timestamp": <Timestamp
+      timestamp="2018-08-19T16:32:55.441Z"
+    />,
+    "type": "primary",
+    "unread": true,
+  },
+  Object {
+    "content": <div>
+      <p>
+        <b>
+          Your subscription expires April 20
+        </b>
+      </p>
+      <p>
+        AutoCAD
+        <br />
+        Architecture Construction Engineering Collection
+        <br />
+        Product Design Collection
+        <br />
+      </p>
+      <p>
+        <TextLink
+          link="https://github.com/Autodesk/hig"
+          onClick={[Function]}
+          type="primary"
+        >
+          Manage renewal
+        </TextLink>
+      </p>
+    </div>,
+    "id": "1",
+    "key": "notification-2",
+    "timestamp": <Timestamp
+      timestamp="2018-08-19T14:32:55.441Z"
+    />,
+    "type": "success",
+    "unread": true,
+  },
+  Object {
+    "content": <div>
+      <p>
+        <b>
+          Your subscription expires June 15
+        </b>
+      </p>
+      <p>
+        AutoCAD
+        <br />
+        Architecture Construction Engineering Collection
+        <br />
+        HIG
+        <br />
+      </p>
+      <p>
+        <TextLink
+          link="https://github.com/Autodesk/hig"
+          onClick={[Function]}
+          type="primary"
+        >
+          Manage Renewal
+        </TextLink>
+      </p>
+    </div>,
+    "id": "3",
+    "key": "notification-3",
+    "timestamp": <Timestamp
+      timestamp="2018-08-18T14:32:55.441Z"
+    />,
+    "type": "error",
+    "unread": true,
+  },
+  Object {
+    "content": <div>
+      <p>
+        <b>
+          Your subscription expires June 15
+        </b>
+      </p>
+      <p>
+        A new version of Autodesk Revit is available for download.
+      </p>
+      <p>
+        <TextLink
+          link="https://github.com/Autodesk/hig"
+          onClick={[Function]}
+          type="primary"
+        >
+          Manage renewal
+        </TextLink>
+      </p>
+    </div>,
+    "id": "4",
+    "key": "notification-4",
+    "timestamp": <Timestamp
+      timestamp="2018-08-18T14:12:55.441Z"
+    />,
+    "type": "warning",
+    "unread": true,
+  },
+]
+`;
