@@ -53,7 +53,6 @@ export default class Notification extends Component {
     const {
       featured,
       onDismiss,
-      onFlyoutHide,
       // Featured notifications show the dismiss button by default
       showDismissButton = featured,
       timestamp,
@@ -62,7 +61,7 @@ export default class Notification extends Component {
     } = this.props;
 
     return (
-      <NotificationBehavior onDismiss={onDismiss} onFlyoutHide={onFlyoutHide}>
+      <NotificationBehavior onDismiss={onDismiss}>
         {({ handleDismissButtonClick, height, innerRef, transitionStatus }) => (
           <NotificationPresenter
             featured={featured}
