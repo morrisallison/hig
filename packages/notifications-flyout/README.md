@@ -13,8 +13,8 @@ yarn add @hig/notifications-flyout
 ## Import the component and CSS
 
 ```js
-import NotificationsFlyout, { Notification } from '@hig/notifications-flyout';
-import '@hig/notifications-flyout/build/index.css';
+import NotificationsFlyout, { Notification } from "@hig/notifications-flyout";
+import "@hig/notifications-flyout/build/index.css";
 ```
 
 ## Basic usage
@@ -25,4 +25,31 @@ import '@hig/notifications-flyout/build/index.css';
     <p>Your subscription expires May 5</p>
   </Notification>
 </NotificationsFlyout>
-  ```
+```
+
+## Advanced usage
+
+```jsx
+import NotificationsFlyout, { anchorPoints } from "@hig/notifications-flyout";
+import Timestamp from "@hig/timestamp";
+import "@hig/timestamp/build/index.css";
+
+<NotificationsFlyout
+  open
+  heading="Alerts"
+  indicatorTitle="View application alerts"
+  anchorPoint={anchorPoints.TOP_CENTER}
+  notifications={[
+    {
+      id: "unique-id",
+      featured: true,
+      unread: true,
+      timestamp: <Timestamp timestamp="2018-08-20T20:24:50.333Z" />,
+      content: <p>Something happened</p>
+    },
+    {
+      content: "Hello world"
+    }
+  ]}
+/>
+```
