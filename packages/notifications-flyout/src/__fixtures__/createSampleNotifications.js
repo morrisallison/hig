@@ -3,7 +3,8 @@ import React from "react";
 import TextLink from "@hig/text-link";
 import Timestamp from "@hig/timestamp";
 
-export default function createSampleNotifications({ baseDate = new Date() }) {
+export default function createSampleNotifications() {
+  const baseDate = new Date();
   const updatedDate1 = baseDate.setMinutes(baseDate.getMinutes() - 3);
   const updatedDate2 = baseDate.setHours(baseDate.getHours() - 2);
   const updatedDate3 = baseDate.setHours(baseDate.getHours() - 24);

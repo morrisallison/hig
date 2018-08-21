@@ -1,17 +1,25 @@
 import React from "react";
 import { mount } from "enzyme";
 
-import createSampleNotifications from "../__fixtures__/createSampleNotifications";
 import NotificationFlyoutBehavior from "./NotificationFlyoutBehavior";
+import Notification from "../Notification";
+import NotificationsFacade from "../facades/NotificationsFacade";
 
 describe("notification-flyout/behaviors/NotificationFlyoutBehavior", () => {
-  const baseDate = new Date("2018-08-20T18:58:55.441Z");
   const children = jest.fn();
 
   function mountBehavior() {
     return mount(
       <NotificationFlyoutBehavior
-        notifications={createSampleNotifications({ baseDate })}
+        notifications={
+          <NotificationsFacade>
+            <Notification id="1" featured>
+              Featured
+            </Notification>
+            <Notification id="2">Foo</Notification>
+            <Notification id="3">Bar</Notification>
+          </NotificationsFacade>
+        }
       >
         {children}
       </NotificationFlyoutBehavior>
@@ -45,7 +53,7 @@ describe("notification-flyout/behaviors/NotificationFlyoutBehavior", () => {
         handleClose: expect.any(Function),
         notifications: expect.any(Array),
         showUnreadCount: true,
-        unreadCount: 5
+        unreadCount: 3
       });
       expect(payload.notifications).toMatchSnapshot();
     });
@@ -61,14 +69,14 @@ describe("notification-flyout/behaviors/NotificationFlyoutBehavior", () => {
         expect(notifications).toHaveLength(length);
       }
 
-      it("filters out the notification of the given ID", () => {
+      it("dismisses the notification of the given ID", () => {
         const { dismissNotification } = payload;
 
-        expectToHaveNotificationTimes(5);
-        dismissNotification("featured");
-        expectToHaveNotificationTimes(4);
-        dismissNotification("featured");
-        expectToHaveNotificationTimes(4);
+        expectToHaveNotificationTimes(3);
+        dismissNotification("1");
+        expectToHaveNotificationTimes(2);
+        dismissNotification("1");
+        expectToHaveNotificationTimes(2);
       });
     });
 
@@ -85,7 +93,7 @@ describe("notification-flyout/behaviors/NotificationFlyoutBehavior", () => {
       it("marks all notifications as read", () => {
         const { handleClose } = payload;
 
-        expectToHaveUnreadNotificationTimes(5);
+        expectToHaveUnreadNotificationTimes(3);
         handleClose();
         expectToHaveUnreadNotificationTimes(0);
       });
@@ -94,7 +102,7 @@ describe("notification-flyout/behaviors/NotificationFlyoutBehavior", () => {
         const { handleClose } = payload;
 
         expect(children).toHaveBeenLastCalledWith(
-          expect.objectContaining({ unreadCount: 5 })
+          expect.objectContaining({ unreadCount: 3 })
         );
 
         handleClose();
@@ -107,7 +115,7 @@ describe("notification-flyout/behaviors/NotificationFlyoutBehavior", () => {
 
     describe("unreadCount", () => {
       it("is derived from the given notifications", () => {
-        expect(payload.unreadCount).toEqual(5);
+        expect(payload.unreadCount).toEqual(3);
       });
 
       describe("when controlled", () => {
