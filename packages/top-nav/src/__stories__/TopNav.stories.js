@@ -1,10 +1,18 @@
 import React from "react";
 import { storiesOf } from "@storybook/react";
 import { withInfo } from "@storybook/addon-info";
-import NotificationsFlyout, { Notification } from "@hig/notifications-flyout";
-import "@hig/notifications-flyout/build/index.css";
+import { Notification } from "@hig/notifications-flyout";
+import Fragment from "render-fragment";
 
-import TopNav from "../index";
+import TopNav, {
+  HelpAction,
+  Interactions,
+  Logo,
+  LogoText,
+  NotificationsAction,
+  ProfileAction,
+  ProfileContent
+} from "../index";
 import AccountLogo from "./accounts-logo.svg";
 import infoOptions from "./infoOptions";
 
@@ -15,39 +23,46 @@ storybook.add(
   withInfo(infoOptions)(() => (
     <TopNav
       logo={
-        <TopNav.Logo
+        <Logo
           label="Autodesk Accounts"
           title="Autodesk Accounts"
           link="https://autodesk.com"
         >
           <AccountLogo style={{ width: "auto", height: "24px", margin: "0" }} />
-        </TopNav.Logo>
+        </Logo>
       }
       rightActions={
-        <TopNav.Interactions>
-          <NotificationsFlyout>
-            <Notification id="1">
-              <div>
-                <strong>First Notification</strong>
-                <p>You can put what ever you want in here.</p>
-              </div>
-            </Notification>
-          </NotificationsFlyout>
-          <TopNav.HelpAction>
-            <div>
-              <h3>Help</h3>
-              <p>You can put what ever you want in here.</p>
-            </div>
-          </TopNav.HelpAction>
-          <TopNav.ProfileAction avatarName="Peter Parker">
-            <TopNav.ProfileContent
-              profileName="Peter Parker"
-              profileEmail="peter@example.com"
-            >
-              <p>You can put what ever you want in here.</p>
-            </TopNav.ProfileContent>
-          </TopNav.ProfileAction>
-        </TopNav.Interactions>
+        <Interactions>
+          {({ alignCoordinatesRight }) => (
+            <Fragment>
+              <NotificationsAction alterCoordinates={alignCoordinatesRight}>
+                <Notification id="1">
+                  <div>
+                    <strong>First Notification</strong>
+                    <p>You can put what ever you want in here.</p>
+                  </div>
+                </Notification>
+              </NotificationsAction>
+              <HelpAction alterCoordinates={alignCoordinatesRight}>
+                <div>
+                  <h3>Help</h3>
+                  <p>You can put what ever you want in here.</p>
+                </div>
+              </HelpAction>
+              <ProfileAction
+                alterCoordinates={alignCoordinatesRight}
+                avatarName="Peter Parker"
+              >
+                <ProfileContent
+                  profileName="Peter Parker"
+                  profileEmail="peter@example.com"
+                >
+                  <p>You can put what ever you want in here.</p>
+                </ProfileContent>
+              </ProfileAction>
+            </Fragment>
+          )}
+        </Interactions>
       }
     />
   ))
@@ -56,22 +71,20 @@ storybook.add(
 storybook.add(
   "with text logo",
   withInfo(infoOptions)(() => (
-    <TopNav
-      logo={<TopNav.Logo link="https://autodesk.com">Autodesk HIG</TopNav.Logo>}
-    />
+    <TopNav logo={<Logo link="https://autodesk.com">Autodesk HIG</Logo>} />
   ))
 );
 
 storybook.add(
-  "using TopNav.LogoText",
+  "using LogoText",
   withInfo(infoOptions)(() => (
     <TopNav
       logo={
-        <TopNav.Logo link="https://autodesk.com" label="Autodesk HIG">
-          <TopNav.LogoText>
+        <Logo link="https://autodesk.com" label="Autodesk HIG">
+          <LogoText>
             AUTODESK <strong>HIG</strong>
-          </TopNav.LogoText>
-        </TopNav.Logo>
+          </LogoText>
+        </Logo>
       }
     />
   ))

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`top-nav/presenters/HelpAction  1`] = `
+exports[`top-nav/presenters/HelpActionPresenter  1`] = `
 <div
   className="hig__top-nav__action"
 >
@@ -66,7 +66,7 @@ exports[`top-nav/presenters/HelpAction  1`] = `
 </div>
 `;
 
-exports[`top-nav/presenters/HelpAction  2`] = `
+exports[`top-nav/presenters/HelpActionPresenter  2`] = `
 <div
   className="hig__top-nav__action"
 >
@@ -136,7 +136,7 @@ exports[`top-nav/presenters/HelpAction  2`] = `
 </div>
 `;
 
-exports[`top-nav/presenters/HelpAction  3`] = `
+exports[`top-nav/presenters/HelpActionPresenter  3`] = `
 <div
   className="hig__top-nav__action"
 >

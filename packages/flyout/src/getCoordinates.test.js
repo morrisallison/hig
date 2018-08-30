@@ -1,7 +1,7 @@
 import { anchorPoints } from "./anchorPoints";
-import getFlyoutPosition from "./getFlyoutPosition";
+import getCoordinates from "./getCoordinates";
 
-describe("flyout/getFlyoutPosition", () => {
+describe("flyout/getCoordinates", () => {
   const basicPayload = {
     anchorPoint: anchorPoints.TOP_CENTER,
     viewportRect: {
@@ -24,7 +24,7 @@ describe("flyout/getFlyoutPosition", () => {
 
   describe("calculations", () => {
     it("calculates the position of the flyout container", () => {
-      const result = getFlyoutPosition(basicPayload);
+      const result = getCoordinates(basicPayload);
 
       expect(result).toHaveProperty("anchorPoint", basicPayload.anchorPoint);
       expect(result).toHaveProperty("leftOffset", -25);
@@ -33,7 +33,7 @@ describe("flyout/getFlyoutPosition", () => {
 
     describe("when the declared anchor point doesn't fit in the viewport", () => {
       it("provides a position for another anchor point that's in the viewport", () => {
-        const result = getFlyoutPosition({
+        const result = getCoordinates({
           ...basicPayload,
           anchorPoint: anchorPoints.RIGHT_CENTER,
           actionRect: {
@@ -50,7 +50,7 @@ describe("flyout/getFlyoutPosition", () => {
 
       describe("when none of the anchor points fit in the viewport", () => {
         it("provides a position at the declared anchor point", () => {
-          const result = getFlyoutPosition({
+          const result = getCoordinates({
             ...basicPayload,
             viewportRect: {
               top: 50,
