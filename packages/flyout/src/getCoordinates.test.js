@@ -20,6 +20,10 @@ describe("flyout/getCoordinates", () => {
       height: 150,
       top: 100,
       left: 100
+    },
+    pointerRect: {
+      width: 12,
+      height: 24
     }
   };
 
