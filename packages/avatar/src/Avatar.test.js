@@ -1,53 +1,57 @@
 import React from "react";
-import renderer from "react-test-renderer";
+import { takeSnapshotsOf } from "@hig/jest-preset/helpers";
 import { mount } from "enzyme";
 
 import Avatar, { sizes } from "./index";
 
-function snapshotTest(props) {
-  const tree = renderer.create(<Avatar {...props} />).toJSON();
+describe("avatar/Avatar", () => {
+  takeSnapshotsOf(Avatar, [
+    {
+      description: "renders without props",
+      props: {}
+    },
+    {
+      description: "renders will all props",
+      props: {
+        name: "Jon Snow",
+        image: "http://placekitten.com/g/64/64",
+        onImageError: function handleImageError() {},
+        size: sizes.LARGE_36
+      }
+    }
+  ]);
 
-  expect(tree).toMatchSnapshot();
-}
+  it("renders initials based on the provided name", () => {
+    const wrapper = mount(<Avatar name="Jon Snow" />);
 
-const basicProps = {
-  name: "Jon Snow",
-  size: sizes.LARGE_36
-};
-
-const imageProps = {
-  ...basicProps,
-  image: "http://placekitten.com/g/64/64"
-};
-
-describe("Avatar", () => {
-  describe("when an image URL is not provided", () => {
-    it("renders initials", () => {
-      snapshotTest(basicProps);
-    });
-
-    it("renders initials based on the provided name", () => {
-      const wrapper = mount(<Avatar {...basicProps} />);
-
-      expect(wrapper.find("Initials")).toIncludeText("JS");
-    });
+    expect(wrapper.find("Initials")).toIncludeText("JS");
   });
 
-  describe("when an image URL is provided", () => {
-    it("renders initials and the image", () => {
-      snapshotTest(imageProps);
+  describe("when an error occurs loading the given image", () => {
+    const handleImageError = jest.fn();
+
+    function mountWithImage() {
+      return mount(<Avatar image="http://placekitten.com/g/64/64" />);
+    }
+
+    it("doesn't render the image", () => {
+      const wrapper = mountWithImage();
+
+      expect(wrapper.find("img")).toBePresent();
+
+      wrapper.find("img").simulate("error");
+
+      expect(wrapper.find("img")).not.toBePresent();
     });
 
-    describe("when an error occurs on the image", () => {
-      it("doesn't render the image", () => {
-        const wrapper = mount(<Avatar {...imageProps} />);
+    it("calls image error handler", () => {
+      const wrapper = mountWithImage();
 
-        expect(wrapper.find("img")).toBePresent();
+      expect(handleImageError).not.toHaveBeenCalled();
 
-        wrapper.find("img").simulate("error");
+      wrapper.find("img").simulate("error");
 
-        expect(wrapper.find("img")).not.toBePresent();
-      });
+      expect(handleImageError).toHaveBeenCalledWith(expect.any(Error));
     });
   });
 });

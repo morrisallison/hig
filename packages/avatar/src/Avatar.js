@@ -3,8 +3,8 @@ import PropTypes from "prop-types";
 import cx from "classnames";
 import { polyfill } from "react-lifecycles-compat";
 
-import "./avatar.scss";
-import { AVAILABLE_SIZES } from "./sizes";
+import { sizes, AVAILABLE_SIZES } from "./sizes";
+import "./Avatar.scss";
 
 /**
  * @param {number} value
@@ -75,14 +75,12 @@ function Initials({ name }) {
 
 /**
  * @typedef {Object} AvatarProps
- * @param {string} name
- * @param {string} size
+ * @param {string} [name]
+ * @param {string} [size]
  * @param {string} [image]
  * @param {Function} [onImageError]
 
 /**
- *
- *
  * @typedef {Object} AvatarState
  * @property {boolean} hasImageError
  * @property {string} [imageUrl]
@@ -91,14 +89,19 @@ function Initials({ name }) {
 class Avatar extends Component {
   static propTypes = {
     /** The name for the avatar */
-    name: PropTypes.string.isRequired,
+    name: PropTypes.string,
     /** Set the size of the avatar */
-    size: PropTypes.oneOf(AVAILABLE_SIZES).isRequired,
+    size: PropTypes.oneOf(AVAILABLE_SIZES),
     /** URL to a profile image */
     // eslint-disable-next-line react/no-unused-prop-types
     image: PropTypes.string,
     /** Called when an error occurs on the image  */
     onImageError: PropTypes.func
+  };
+
+  static defaultProps = {
+    name: "",
+    size: sizes.MEDIUM_32
   };
 
   /** @type {AvatarState} */
