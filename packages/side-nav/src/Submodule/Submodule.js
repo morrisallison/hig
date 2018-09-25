@@ -3,8 +3,9 @@ import PropTypes from "prop-types";
 import cx from "classnames";
 import { sizes as iconSizes } from "@hig/icon";
 import { ThemeContext } from "@hig/themes";
-import ExternalLinkIcon from "../presenters/ExternalLinkIcon";
 
+import { AVAILABLE_TARGETS } from "../targets";
+import ExternalLinkIcon from "../presenters/ExternalLinkIcon";
 import "./submodule.scss";
 
 export default class Submodule extends Component {
@@ -18,7 +19,7 @@ export default class Submodule extends Component {
     /** Called when hovering over the submodule */
     onMouseOver: PropTypes.func,
     /** Anchor target. Applicable only if link is provided */
-    target: PropTypes.oneOf(["_self", "_blank", "_parent", "_top"]),
+    target: PropTypes.oneOf(AVAILABLE_TARGETS),
     /** Text to render */
     title: PropTypes.string
   };
