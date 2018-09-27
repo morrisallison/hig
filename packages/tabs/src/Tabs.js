@@ -1,6 +1,7 @@
 import React, { Component, Children } from "react";
 import Fragment from "render-fragment";
 import PropTypes from "prop-types";
+import { createButtonEventHandlers } from "@hig/utils";
 import { polyfill } from "react-lifecycles-compat";
 
 import { AVAILABLE_ALIGNMENTS, alignments } from "./alignments";
@@ -123,16 +124,6 @@ class Tabs extends Component {
   }
 
   /**
-   * @param {number} index
-   * @returns {Function}
-   */
-  createTabClickHandler(index) {
-    return () => {
-      this.setActiveTab(index);
-    };
-  }
-
-  /**
    * @param {TabMeta} tab
    * @param {number} index
    * @returns {JSX.Element}
@@ -140,12 +131,13 @@ class Tabs extends Component {
   renderTab = ({ key, props }, index) => {
     const { render, label } = props;
     const { activeTabIndex } = this.state;
+    const activateTab = () => this.setActiveTab(index);
     /** @type {RenderTabPayload} */
     const payload = {
       key,
       label,
       active: activeTabIndex === index,
-      handleClick: this.createTabClickHandler(index)
+      ...createButtonEventHandlers(activateTab)
     };
 
     return render(payload);
