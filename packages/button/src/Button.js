@@ -84,6 +84,7 @@ export default class Button extends Component {
     const {
       disabled,
       icon,
+      isPressed,
       link,
       onBlur,
       onClick,

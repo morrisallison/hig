@@ -18,7 +18,7 @@
     "build/*"
   ],
   "dependencies": {
-    "@hig/themes": "^0.3.0",
+    "@hig/theme-context": "^1.0.0-alpha",
     "classnames": "^2.2.5",
     "prop-types": "^15.6.1"
   },

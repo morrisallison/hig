@@ -71,7 +71,6 @@ function Input(props) {
     </ControlBehavior>
   );
 }
-
 Input.propTypes = {
   /**
    * Indicates if the input can be automatically completed by the browser
